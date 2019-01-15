@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RorReact</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <% if false %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+    
+    <%= javascript_pack_tag 'rorApp/index' %>
+    <%= stylesheet_pack_tag 'rorApp/assets/stylesheets/app' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
