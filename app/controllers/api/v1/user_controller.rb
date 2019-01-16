@@ -8,7 +8,8 @@ class Api::V1::UserController < Api::V1::BaseController
   end
 
   def destroy
-    respond_with User.destroy(params[:id])
+    user = User.find(params["id"])
+    respond_with user.destroy()
   end
 
   def update

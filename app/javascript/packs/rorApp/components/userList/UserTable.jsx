@@ -9,7 +9,8 @@ class UserTable extends React.Component {
     this.renderPopulatedTable = this.renderPopulatedTable.bind(this);
 
     this.state = {
-      users: props.users
+      users: props.users,
+      editable: {},
     };
   }
 
@@ -17,8 +18,23 @@ class UserTable extends React.Component {
     this.setState({users: nextProps.users});
   }
 
-  handleClickEdit () {
-    alert('tada!');
+  checkState() {
+    console.dir(this.state);
+  }
+
+  handleChange( id, type) {
+    console.log('id: ', id);
+    console.log('type: ', type);
+  }
+
+  handleClickEdit (id, user, e) {
+    console.dir(e.target);
+    // let id = e.target.attributes.id.value.substr(5);
+    // console.dir(user);
+    if (!this.state.editable[id])
+      this.setState({ editable: {[id]: true} });
+    else
+      this.setState({ editable: {[id]: false} }) && Api.editUser(id, user);
   }
 
   renderEmptyTable () {
@@ -36,26 +52,34 @@ class UserTable extends React.Component {
     console.dir(this.state);
 
     var list = this.state.users.map(function(user) {
+      let id = user._id.$oid;
+      let username = this.state.editable[id] ? <input type='text' defaultValue={user.username} onChange={this.handleChange.bind(this, id, 'username')}/> : <p>{user.username}</p>;
+      let fullname = this.state.editable[id] ? <input type='text' defaultValue={user.fullname} onChange={this.handleChange} /> : <p>{user.fullname}</p>;
+      let password = this.state.editable[id] ? <input type='text' defaultValue={user.password} onChange={this.handleChange} /> : <p>{user.password}</p>;
+      let email    = this.state.editable[id] ? <input type='text' defaultValue={user.email} onChange={this.handleChange} />    : <p>{user.email}</p>;
       return (
-        <tr key={user._id.$oid}>
-          <td>{user.username}</td>
-          <td>{user.fullname}</td>
-          <td>{user.password}</td>
-          <td>{user.email}</td>
+        <tr key={id}>
+          <td>{username}</td>
+          <td>{fullname}</td>
+          <td>{password}</td>
+          <td>{email}</td>
           <td>
-            <a className="btn btn-default" id={user._id.$oid} onClick={this.handleClickEdit} >Edit</a>
+            <a className="btn btn-default" onClick={this.handleClickEdit.bind(this, id, user)}>{this.state.editable[id] ? 'Save' : 'Edit'}</a>
           </td>
           <td>
-            <a className="btn btn-danger">Delete</a>
+            <a className="btn btn-danger" onClick={this.props.handleDelete.bind(this, id)}>Delete</a>
           </td>
         </tr>
       );
     }, this);
 
     return (
-      <tbody>
-        {list}
-      </tbody>
+      <React.Fragment>
+        <tbody>
+          {list}
+        </tbody>
+        <a className="btn btn-default" onClick={this.checkState.bind(this)} >Check State</a>
+      </React.Fragment>
     );
 
   }
