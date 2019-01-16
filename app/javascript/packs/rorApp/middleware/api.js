@@ -30,6 +30,7 @@ const getUsers = (callback) => {
 }
 
 const editUser = (id, user) => {
+  console.log("editUser");
   $.ajax({
     url: "/api/v1/user/"+id,
     type: "PATCH",

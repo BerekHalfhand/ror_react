@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {Api} from '../middleware/api'
 
 // Components
-import UserTable from './userList/UserTable';
+import UserTable from './userList/userTable';
 
 class UserList extends React.Component {
   constructor(props) {
@@ -83,6 +83,7 @@ class UserList extends React.Component {
         <input ref="password" placeholder="Password" className="myInput"/>
         <input ref="email" placeholder="Email" className="myInput"/>
         <a className="btn btn-default" onClick={this.onClickNew} >New User</a>
+        <hr />
 
          <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>
 
