@@ -2,11 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {Api} from '../middleware/api'
 
+// Components
+import UserTable from './userList/UserTable';
+
 class UserList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: null
+      users: null,
+      loaded: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.checkState = this.checkState.bind(this);
@@ -27,12 +31,16 @@ class UserList extends React.Component {
   componentDidMount() {
     // this.setState({loaded: true});
     // Api.getUsers(this.setUsers);
+    // .then
     $.getJSON('/api/v1/user.json', (response) => {
       console.dir(response);
-      this.setState({users: response});
+      this.setState({
+        users: response,
+        loaded: true,
+      });
     });
   }
-
+//{this.state.loaded ? <UserTable users={this.state.users}/> : ''}
   render() {
     return(
       <div>
@@ -42,6 +50,8 @@ class UserList extends React.Component {
         <input ref="fullname" placeholder="Full Name" />
         <a className="btn btn-default" onClick={this.handleClick} >New User</a>
         <a className="btn btn-default" onClick={this.checkState} >Check State</a>
+
+         <UserTable users={this.state.users}/>
       </div>
     )
   }
