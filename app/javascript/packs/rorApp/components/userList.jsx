@@ -76,13 +76,13 @@ class UserList extends React.Component {
     return(
       <div>
         <h1 className="hello">I'm a user list</h1>
-        <a className="btn btn-default" onClick={this.checkState} >Check State</a>
+        <button type="button" className="btn btn-light mb-2" onClick={this.checkState}>Check State</button>
 
         <input ref="username" placeholder="Username" className="myInput"/>
         <input ref="fullname" placeholder="Full Name" className="myInput"/>
         <input ref="password" placeholder="Password" className="myInput"/>
         <input ref="email" placeholder="Email" className="myInput"/>
-        <a className="btn btn-default" onClick={this.onClickNew} >New User</a>
+        <button type="button" class="btn btn-primary mt-2" onClick={this.onClickNew} >New User</button>
         <hr />
 
          <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>

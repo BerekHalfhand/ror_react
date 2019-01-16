@@ -43,10 +43,10 @@ class UserItem extends React.Component {
         <td>{password}</td>
         <td>{email}</td>
         <td>
-          <a className="btn btn-default" onClick={this.handleClickEdit.bind(this, this.props.id, user)}>{this.state.editable ? 'Save' : 'Edit'}</a>
+          <button type="button" class="btn btn-warning" onClick={this.handleClickEdit.bind(this, this.props.id, user)}>{this.state.editable ? 'Save' : 'Edit'}</button>
         </td>
         <td>
-          <a className="btn btn-danger" onClick={this.props.handleDelete.bind(this, this.props.id)}>Delete</a>
+          <button type="button" class="btn btn-danger" onClick={this.props.handleDelete.bind(this, this.props.id)}>Delete</button>
         </td>
       </tr>
     );
