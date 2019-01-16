@@ -4,6 +4,7 @@ A basic demo app for stack building. Current stack:
 * Webpack
 * React
 * React Router
+* Bootstrap 4
 
 Installation:
 rails new example_app --webpack=react
