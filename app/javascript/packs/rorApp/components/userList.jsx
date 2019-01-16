@@ -80,10 +80,10 @@ class UserList extends React.Component {
         <h1>I'm a user list</h1>
         <button type="button" className="btn btn-light mb-2" onClick={this.checkState.bind(this)}>Check State</button>
 
-        <input ref="username" placeholder="Username" className="myInput mb-1"/>
-        <input ref="fullname" placeholder="Full Name" className="myInput mb-1"/>
-        <input ref="password" placeholder="Password" className="myInput mb-1"/>
-        <input ref="email" placeholder="Email" className="myInput mb-1"/>
+        <input ref="username" placeholder="Username" className="block mb-1"/>
+        <input ref="fullname" placeholder="Full Name" className="block mb-1"/>
+        <input ref="password" placeholder="Password" className="block mb-1"/>
+        <input ref="email" placeholder="Email" className="block mb-1"/>
         <button type="button" className="btn btn-primary mt-1" onClick={this.onClickNew} >New User</button>
         <hr />
          <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>
