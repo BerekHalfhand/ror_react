@@ -12,7 +12,6 @@ class UserList extends React.Component {
       users: null,
     };
     this.onClickNew = this.onClickNew.bind(this);
-    this.checkState = this.checkState.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.removeUser = this.removeUser.bind(this);
   }
@@ -34,6 +33,11 @@ class UserList extends React.Component {
         this.setState({
           users: newUsers
         });
+
+        this.refs.username.value = "";
+        this.refs.fullname.value = "";
+        this.refs.password.value = "";
+        this.refs.email.value = "";
       }
     });
   }
@@ -62,10 +66,8 @@ class UserList extends React.Component {
   }
 
   componentDidMount() {
-    // this.setState({loaded: true});
-    // Api.getUsers(this.setUsers);
-    // .then
     $.getJSON('/api/v1/user.json', (response) => {
+      console.log(`Loaded ${response.length} users`);
       this.setState({
         users: response,
       });
@@ -74,22 +76,20 @@ class UserList extends React.Component {
 
   render() {
     return(
-      <div>
-        <h1 className="hello">I'm a user list</h1>
-        <button type="button" className="btn btn-light mb-2" onClick={this.checkState}>Check State</button>
+      <React.Fragment>
+        <h1>I'm a user list</h1>
+        <button type="button" className="btn btn-light mb-2" onClick={this.checkState.bind(this)}>Check State</button>
 
-        <input ref="username" placeholder="Username" className="myInput"/>
-        <input ref="fullname" placeholder="Full Name" className="myInput"/>
-        <input ref="password" placeholder="Password" className="myInput"/>
-        <input ref="email" placeholder="Email" className="myInput"/>
-        <button type="button" class="btn btn-primary mt-2" onClick={this.onClickNew} >New User</button>
+        <input ref="username" placeholder="Username" className="myInput mb-1"/>
+        <input ref="fullname" placeholder="Full Name" className="myInput mb-1"/>
+        <input ref="password" placeholder="Password" className="myInput mb-1"/>
+        <input ref="email" placeholder="Email" className="myInput mb-1"/>
+        <button type="button" className="btn btn-primary mt-1" onClick={this.onClickNew} >New User</button>
         <hr />
-
          <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>
 
-
          <Link to="/">Home</Link>
-      </div>
+      </React.Fragment>
     )
   }
 }

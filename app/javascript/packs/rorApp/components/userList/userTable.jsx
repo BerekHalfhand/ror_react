@@ -20,10 +20,6 @@ class UserTable extends React.Component {
     this.setState({users: nextProps.users});
   }
 
-  // checkState() {
-  //   console.dir(this.state);
-  // }
-
   renderEmptyTable () {
     return (
       <tbody>
@@ -36,7 +32,6 @@ class UserTable extends React.Component {
 
   renderPopulatedTable () {
     console.log('renderPopulatedTable');
-    console.dir(this.state);
 
     var list = this.state.users.map(function(user) {
       let id = user._id.$oid;
@@ -82,6 +77,6 @@ class UserTable extends React.Component {
 }
 
 UserTable.propTypes = {
-  people: PropTypes.string
+  users: PropTypes.array
 };
 export default UserTable

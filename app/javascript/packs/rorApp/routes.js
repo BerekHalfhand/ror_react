@@ -14,7 +14,7 @@ const App = (props) => (
     <div className="row layout">
       <Header />
       <Sidebar/>
-      <article id="app-body" className="main col-10 h-100 py-3">
+      <article id="app-body" className="main col-10 py-3">
         <Route exact path='/' component={LandingPage} />
         <Route exact path='/userList' component={UserList} />
       </article>
