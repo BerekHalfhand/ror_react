@@ -12,6 +12,26 @@ $header-height: 80px;
   bottom:0;
 }
 
+#user-table {
+  td:nth-child(5), td:nth-child(6), th{
+    text-align: center;
+  }
+
+  td {
+    width: 16.6%;
+    height: 65px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    width: 85px;
+    cursor: pointer;
+  }
+}
+
 .grow {
     flex: 1;
 }
@@ -34,8 +54,4 @@ $header-height: 80px;
   left: 0;
   top: 0;
   z-index: 10;
-}
-
-.block {
-  display: block;
 }

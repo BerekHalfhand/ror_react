@@ -50,13 +50,12 @@ class UserTable extends React.Component {
       </React.Fragment>
     );
 
-    //<a className="btn btn-default" onClick={this.checkState.bind(this)} >Check State</a>
   }
 
   render () {
     return (
       <React.Fragment>
-        <table className="table table-bordered table-striped">
+        <table id="user-table" className="table table-bordered table-striped">
           <thead>
             <tr>
               <th>Username</th>

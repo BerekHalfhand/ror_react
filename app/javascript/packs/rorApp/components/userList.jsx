@@ -22,7 +22,7 @@ class UserList extends React.Component {
     var fullname = this.refs.fullname.value;
     var password = this.refs.password.value;
     var email = this.refs.email.value;
-    //.createUser(username, fullname);
+
     $.ajax({
       url: "/api/v1/user",
       type: "POST",
@@ -77,13 +77,13 @@ class UserList extends React.Component {
   render() {
     return(
       <React.Fragment>
-        <h1>I'm a user list</h1>
-        <button type="button" className="btn btn-light mb-2" onClick={this.checkState.bind(this)}>Check State</button>
+        <h1>Users in the system</h1>
+        <button type="button" className="btn btn-light mb-2 d-none" onClick={this.checkState.bind(this)}>Check State</button>
 
-        <input ref="username" placeholder="Username" className="block mb-1"/>
-        <input ref="fullname" placeholder="Full Name" className="block mb-1"/>
-        <input ref="password" placeholder="Password" className="block mb-1"/>
-        <input ref="email" placeholder="Email" className="block mb-1"/>
+        <input ref="username" placeholder="Username" className="d-block mb-1"/>
+        <input ref="fullname" placeholder="Full Name" className="d-block mb-1"/>
+        <input ref="password" placeholder="Password" className="d-block mb-1"/>
+        <input ref="email" placeholder="Email" className="d-block mb-1"/>
         <button type="button" className="btn btn-primary mt-1" onClick={this.onClickNew} >New User</button>
         <hr />
          <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>
