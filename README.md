@@ -1,9 +1,11 @@
 A basic demo app for stack building. Current stack:
 * Ruby on Rails
+* Webpack
 * MongoDB
 * Webpack
 * React
 * React Router
+* Jest + Enzyme
 * Bootstrap 4
 * jquery, sass
 

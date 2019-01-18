@@ -13,6 +13,24 @@
     "webpack-cli": "^3.2.1"
   },
   "devDependencies": {
+    "babel-jest": "^23.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest": "^23.6.0",
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "roots": [
+      "app/tests"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript"
+    ],
+    "setupTestFrameworkScriptFile": "./app/tests/setupTests.js"
   }
 }
