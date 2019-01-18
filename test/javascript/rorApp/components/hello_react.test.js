@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme'
 import HelloReact from 'packs/hello_react'
 

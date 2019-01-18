@@ -37,7 +37,7 @@ class UserItem extends React.Component {
     let email    = this.state.editable ? <input type='text' defaultValue={user.email} ref="email"/>       : <p>{user.email}</p>;
     let cancelBtn= this.state.editable ?
                    <button type="button" className="btn btn-danger" onClick={() => this.flipEditable()}>Cancel</button> :
-                   <button type="button" className="btn btn-danger" onClick={this.props.handleDelete.bind(this, this.props.id)}>Delete</button>;
+                   <button id="delete-button" type="button" className="btn btn-danger" onClick={this.props.handleDelete.bind(this, this.props.id)}>Delete</button>;
 
     return (
       <tr>

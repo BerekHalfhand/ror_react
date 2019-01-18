@@ -1,5 +1,3 @@
-import React from 'react'
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';

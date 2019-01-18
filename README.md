@@ -5,13 +5,15 @@ A basic demo app for stack building. Current stack:
 * Webpack
 * React
 * React Router
-* Jest + Enzyme
+* Unit testing with Jest + Enzyme + Chai
 * Bootstrap 4
 * jquery, sass
 
 Installation:
 
-(Outside the project's dir): `gem install foreman`
+(Outside the project's dir):
+
+`gem install foreman`
 
 `rails new example_app --webpack=react`
 

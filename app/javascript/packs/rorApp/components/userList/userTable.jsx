@@ -12,7 +12,7 @@ class UserTable extends React.Component {
     this.renderPopulatedTable = this.renderPopulatedTable.bind(this);
 
     this.state = {
-      users: props.users
+      users: props.users || null,
     };
   }
 
@@ -34,7 +34,7 @@ class UserTable extends React.Component {
     console.log('renderPopulatedTable');
 
     var list = this.state.users.map(function(user) {
-      let id = user._id.$oid;
+      let id = user && user._id && user._id.$oid && user._id.$oid;
 
       return (
         <UserItem key={id} id={id} user={user}
@@ -67,7 +67,7 @@ class UserTable extends React.Component {
             </tr>
           </thead>
 
-            {!this.state.users ? this.renderEmptyTable() : this.renderPopulatedTable()}
+            {!this.state.users || !this.state.users.length ? this.renderEmptyTable() : this.renderPopulatedTable()}
 
         </table>
       </React.Fragment>
@@ -76,6 +76,7 @@ class UserTable extends React.Component {
 }
 
 UserTable.propTypes = {
-  users: PropTypes.array
+  users: PropTypes.array,
+  handleDelete: PropTypes.func.isRequired
 };
 export default UserTable

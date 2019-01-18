@@ -1,16 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom';
-import { mount, shallow } from 'enzyme'
+import { mount, shallow, render } from 'enzyme'
 import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';
-import $ from 'jquery'
 
 
-import UserList from 'packs/rorApp/components/userList'
+// Components
+import UserList from 'packs/rorApp/components/userList';
+import UserTable from 'packs/rorApp/components/userList/userTable';
+
+const users = [{ username: 'username', fullname: 'fullname', password: 'password', email: 'email', _id: {$oid: "5c4258569375b06aa90b6718"} }];
+const wrapper = shallow(<UserList users={users} />);
+// const handleSubmitSpy = jest.fn();
+let container, containerProp, childContainer, childContainerProps;
 
 describe('Component: userList', () => {
-  const users = [{ username: 'username', fullname: 'fullname', password: 'password', email: 'email' }];
-
   it('should match its empty snapshot', () => {
     const tree = renderer.create(
       <userList />
@@ -19,25 +21,59 @@ describe('Component: userList', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should add a user', () => {
-    const wrapper = shallow(<UserList />);
-    wrapper.is(UserList);
-    // console.log(wrapper.html());
-    // expect(wrapper.is('div')).to.equal(true);
+  it('should utilize props', () => {
+    const wrapperNoProps = shallow(<UserList />);
 
-    console.log('length', wrapper.find('h1').length);
+    expect(wrapper.state().users).toEqual(users);
+    expect(wrapperNoProps.state().users).toBeNull();
+  });
 
-    // expect(wrapper.find('h1').length).toBe(5);
+  it('should behave', () => {
+    // beforeEach(() => {
+    //   handleSubmitSpy.mockClear();
+    // });
 
-    // const component = mount(<userList users={users} />);
-    // const preventDefault = jest.fn();
-    // // component.setState({
-    // //   users
-    // // });
-    // expect(component.find('input.d-block:nth-child(3)')).to.have.lengthOf(4);
-    // // component.find('form').simulate('submit', { preventDefault });
-    // expect(toJson(component)).toMatchSnapshot();
-    // expect(preventDefault).toBeCalled();
-});
+    const preventDefault = jest.fn();
+
+    // wrapper.is(UserList);
+    expect(wrapper.find('input').length).toBe(4);
+
+    wrapper.find('input#username').simulate('change', { target:
+      {
+        value: 'Change function',
+        id: 'username'
+      }
+    });
+
+
+    wrapper.find('form').simulate('submit', { preventDefault });
+    expect(preventDefault).toBeCalled();
+    // expect(handleSubmitSpy).toHaveBeenCalled();
+
+    // expect(wrapper.state().users).toEqual(users);
+    console.dir(wrapper.state());
+
+
+  });
+
+  describe("Child: UserTable", () => {
+    beforeEach(() => {
+      childContainer = wrapper.find('UserTable');
+      childContainerProps = childContainer.props();
+    });
+
+    it("should have a <userTable>", () => {
+      expect(childContainer).toHaveLength(1);
+    });
+
+    it("should have label as prop", () => {
+      expect(childContainerProps.users).toEqual(users);
+    });
+
+    it("should have onSubmit as prop", () => {
+      expect(typeof childContainerProps.handleDelete).toBe("function");
+    });
+  });
+
 
 })
