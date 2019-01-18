@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { mount, shallow } from 'enzyme'
 import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';
+import $ from 'jquery'
 
 
 import UserList from 'packs/rorApp/components/userList'
