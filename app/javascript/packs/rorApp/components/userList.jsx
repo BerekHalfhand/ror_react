@@ -9,7 +9,7 @@ class UserList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: null,
+      users: props.users || null,
     };
     this.onClickNew = this.onClickNew.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -66,12 +66,13 @@ class UserList extends React.Component {
   }
 
   componentDidMount() {
-    $.getJSON('/api/v1/user.json', (response) => {
-      console.log(`Loaded ${response.length} users`);
-      this.setState({
-        users: response,
+    if (!this.state.users)
+      $.getJSON('/api/v1/user.json', (response) => {
+        console.log(`Loaded ${response.length} users`);
+        this.setState({
+          users: response,
+        });
       });
-    });
   }
 
   render() {
@@ -82,13 +83,13 @@ class UserList extends React.Component {
 
         <input ref="username" placeholder="Username" className="d-block mb-1"/>
         <input ref="fullname" placeholder="Full Name" className="d-block mb-1"/>
-        <input ref="password" placeholder="Password" className="d-block mb-1"/>
+        <input ref="password" placeholder="Password" className="d-block mb-1 foo"/>
         <input ref="email" placeholder="Email" className="d-block mb-1"/>
         <button type="button" className="btn btn-primary mt-1" onClick={this.onClickNew} >New User</button>
         <hr />
-         <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>
-
-         <Link to="/">Home</Link>
+        <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>
+        <hr />
+        <Link to="/">Home</Link>
       </React.Fragment>
     )
   }
