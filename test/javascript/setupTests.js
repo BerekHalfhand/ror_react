@@ -10,6 +10,7 @@ import chaiEnzyme from 'chai-enzyme';
 // global.expect = chai.expect;
 
 // Make sure chai and jasmine ".not" play nice together
+//.not.toHaveBeenCalled() still won't work, use .toHaveBeenCalledTimes(0)
 const originalNot = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'not').get;
 Object.defineProperty(chai.Assertion.prototype, 'not', {
   get() {

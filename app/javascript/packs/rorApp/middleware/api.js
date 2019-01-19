@@ -4,61 +4,41 @@ let post = (payload) => {
 }
 
 // Public API
-const helloWorld = () => {
-  let payload = "Hello World! I'm an API!"
-
-  post(payload)
+const getUsers = (callback) => {
+  console.log("API::getUsers");
+  return $.getJSON('/api/v1/user.json');
 }
 
-const createUser = (username, fullname) => {
-  $.ajax({
+const createUser = (user) => {
+  console.log("API::createUser");
+  return $.ajax({
     url: "/api/v1/user",
     type: "POST",
-    data: { user: { username: username, fullname: fullname, password: '', email: '' } },
-    success: response => {
-      console.log("createUser response: ", response);
-      post(response);
-    }
-  });
-}
-
-const getUsers = (callback) => {
-  $.getJSON('/api/v1/user.json', (response) => {
-    callback(response);
-    post(response);
+    data: { user: user },
   });
 }
 
 const editUser = (id, user) => {
-  console.log("editUser");
-  $.ajax({
+  console.log("API::editUser");
+  return $.ajax({
     url: "/api/v1/user/"+id,
     type: "PATCH",
     data: { user: user },
-    success: response => {
-      console.log("editUser response: ", response);
-      post(response);
-    }
   });
 }
 
 const deleteUser = (id) => {
-  console.log("deleteUser ", id);
-  $.ajax({
+  console.log("API::deleteUser ", id);
+  return $.ajax({
     url: `/api/v1/user/${id}`,
     type: "DELETE",
-    success: response => {
-      console.log("deleteUser response: ", response);
-      post(response);
-    }
   });
 }
 
 // Export Api
 export const Api = {
-  helloWorld,
+  getUsers,
   createUser,
   editUser,
   deleteUser,
-  getUsers,
 }

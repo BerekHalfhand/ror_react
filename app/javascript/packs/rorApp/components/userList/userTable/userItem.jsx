@@ -14,8 +14,10 @@ class UserItem extends React.Component {
     this.setState({ editable: !this.state.editable });
   }
 
-  handleClickEdit (id, user, e) {
-    console.log('UserItem:handleClickEdit');
+  handleEdit (id, user, e) {
+    console.log('UserItem:handleEdit');
+    if (!id || !user)
+      return false;
 
     if (this.state.editable) {
       user.username = this.refs.username.value;
@@ -27,6 +29,7 @@ class UserItem extends React.Component {
     }
 
     this.flipEditable();
+    return true;
   }
 
   render () {
@@ -46,7 +49,7 @@ class UserItem extends React.Component {
         <td>{password}</td>
         <td>{email}</td>
         <td>
-          <button type="button" className="btn btn-warning" onClick={this.handleClickEdit.bind(this, this.props.id, user)}>
+          <button type="button" className="btn btn-warning" onClick={this.handleEdit.bind(this, this.props.id, user)}>
             {this.state.editable ? 'Save' : 'Edit'}
           </button>
         </td>

@@ -23,10 +23,20 @@ describe('Component: userItem', () => {
   });
 
   it("should call handleDelete", () => {
-    expect(handleDeleteSpy).not.toHaveBeenCalled();
+    expect(handleDeleteSpy).toHaveBeenCalledTimes(0);
     deleteButton.simulate("click");
     // console.dir(wrapper.props());
     expect(handleDeleteSpy).toHaveBeenCalled();
     expect(handleDeleteSpy).toHaveBeenCalledWith(user._id.$oid);
+  });
+
+  it("should call handleEdit", () => {
+    wrapper.instance().flipEditable = jest.fn();
+    // wrapper.update();
+    let response1 = wrapper.instance().handleEdit(user._id.$oid, user),
+        response2 = wrapper.instance().handleEdit(user._id.$oid);
+    expect(response1).toBe(true);
+    expect(response2).toBe(false);
+    expect(wrapper.instance().flipEditable).toHaveBeenCalledTimes(1);
   });
 })

@@ -18,42 +18,31 @@ class UserList extends React.Component {
     this.removeUser = this.removeUser.bind(this);
   }
 
-  handleSubmit(event) {
+  handleSubmit(event, newUser) {
+  // console.log("handleSubmit");
     event.preventDefault();
-    console.log("handleSubmit");
-    let newUser = this.state.newUser;
+    newUser = newUser || this.state.newUser;
+
     if (!newUser || !newUser.username)
       return false;
 
-
-    // var username = this.refs.username.value;
-    // var fullname = this.refs.fullname.value;
-    // var password = this.refs.password.value;
-    // var email = this.refs.email.value;
-
-    $.ajax({
-      url: "/api/v1/user",
-      type: "POST",
-      data: { user: newUser },
-      success: response => {
+    Api.createUser(newUser)
+    .done(response => {
+        console.log('then');
+        console.dir(response);
         let newUsers = this.state.users;
         newUsers.push(response);
         this.setState({
           users: newUsers
         });
-
-        // this.refs.username.value = "";
-        // this.refs.fullname.value = "";
-        // this.refs.password.value = "";
-        // this.refs.email.value = "";
-      }
+        return response;
     });
 
     return true;
   }
 
   handleChange(event) {
-    console.log(`handleChange: ${event.target.id}, ${event.target.value}`);
+    // console.log(`handleChange: ${event.target.id}, ${event.target.value}`);
     let field = {[event.target.id]: event.target.value};
     this.setState({
       newUser: {...this.state.newUser, ...field}
@@ -69,14 +58,11 @@ class UserList extends React.Component {
   }
 
   handleDelete (id) {
-    console.log("deleteUser ", id);
-    $.ajax({
-      url: `/api/v1/user/${id}`,
-      type: "DELETE",
-      success: response => {
-        this.removeUser(id);
-      }
-    });
+    // console.log("handleDelete ", id);
+    Api.deleteUser(id)
+    .done(response => {
+      this.removeUser(id);
+    })
   }
 
   checkState() {
@@ -85,7 +71,8 @@ class UserList extends React.Component {
 
   componentDidMount() {
     if (!this.state.users)
-      $.getJSON('/api/v1/user.json', (response) => {
+      Api.getUsers()
+      .done(response => {
         console.log(`Loaded ${response.length} users`);
         this.setState({
           users: response,

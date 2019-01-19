@@ -9,8 +9,9 @@ import UserTable from 'packs/rorApp/components/userList/userTable';
 
 const users = [{ username: 'username', fullname: 'fullname', password: 'password', email: 'email', _id: {$oid: "5c4258569375b06aa90b6718"} }];
 const wrapper = shallow(<UserList users={users} />);
-// const handleSubmitSpy = jest.fn();
-let container, containerProp, childContainer, childContainerProps;
+const preventDefault = jest.fn();
+
+let childContainer, childContainerProps;
 
 describe('Component: userList', () => {
   it('should match its empty snapshot', () => {
@@ -28,12 +29,14 @@ describe('Component: userList', () => {
     expect(wrapperNoProps.state().users).toBeNull();
   });
 
-  it('should behave', () => {
-    // beforeEach(() => {
-    //   handleSubmitSpy.mockClear();
-    // });
+  test('should accept user', () => {
+    let   response1 = wrapper.instance().handleSubmit({preventDefault}),
+          response2 = wrapper.instance().handleSubmit({preventDefault}, users[0]);
+    expect(response1).toBe(false);
+    expect(response2).toBe(true);
+  });
 
-    const preventDefault = jest.fn();
+  it('should behave', () => {
 
     // wrapper.is(UserList);
     expect(wrapper.find('input').length).toBe(4);
@@ -45,15 +48,10 @@ describe('Component: userList', () => {
       }
     });
 
-
     wrapper.find('form').simulate('submit', { preventDefault });
     expect(preventDefault).toBeCalled();
-    // expect(handleSubmitSpy).toHaveBeenCalled();
 
-    // expect(wrapper.state().users).toEqual(users);
-    console.dir(wrapper.state());
-
-
+    // console.dir(wrapper.state());
   });
 
   describe("Child: UserTable", () => {
