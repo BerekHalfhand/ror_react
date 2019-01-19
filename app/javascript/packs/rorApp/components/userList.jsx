@@ -5,7 +5,7 @@ import {Api} from '../middleware/api'
 // Components
 import UserTable from './userList/userTable';
 
-class UserList extends React.Component {
+export default class UserList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -93,12 +93,10 @@ class UserList extends React.Component {
           <button type="submit" className="btn btn-primary mt-1">New User</button>
         </form>
         <hr />
-        <UserTable users={this.state.users} handleDelete={this.handleDelete.bind(this)}/>
+        <UserTable users={this.state.users} onDelete={this.handleDelete.bind(this)}/>
         <hr />
         <Link to="/">Home</Link>
       </React.Fragment>
     )
   }
 }
-
-export default UserList

@@ -3,7 +3,13 @@ import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';
 import {Api} from '../../../middleware/api'
 
-class UserItem extends React.Component {
+export default class UserItem extends React.Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    user: PropTypes.object,
+    onDelete: PropTypes.func.isRequired,
+  }
+
   constructor (props) {
     super(props);
     this.flipEditable = this.flipEditable.bind(this);
@@ -40,7 +46,7 @@ class UserItem extends React.Component {
     let email    = this.state.editable ? <input type='text' defaultValue={user.email} ref="email"/>       : <p>{user.email}</p>;
     let cancelBtn= this.state.editable ?
                    <button type="button" className="btn btn-danger" onClick={() => this.flipEditable()}>Cancel</button> :
-                   <button id="delete-button" type="button" className="btn btn-danger" onClick={this.props.handleDelete.bind(this, this.props.id)}>Delete</button>;
+                   <button id="delete-button" type="button" className="btn btn-danger" onClick={this.props.onDelete.bind(this, this.props.id)}>Delete</button>;
 
     return (
       <tr>
@@ -60,9 +66,3 @@ class UserItem extends React.Component {
     );
   }
 }
-
-UserItem.propTypes = {
-  id: PropTypes.string,
-  user: PropTypes.object,
-};
-export default UserItem

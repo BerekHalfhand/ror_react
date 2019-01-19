@@ -6,14 +6,14 @@ import toJson from 'enzyme-to-json';
 import UserTable from 'packs/rorApp/components/userList/userTable';
 
 const users = [{ username: 'username', fullname: 'fullname', password: 'password', email: 'email', _id: {$oid: "5c4258569375b06aa90b6718"} }];
-const handleDelete = jest.fn();
+const onDelete = jest.fn();
 
-const wrapper = shallow(<UserTable users={users} handleDelete={handleDelete} />);
+const wrapper = shallow(<UserTable users={users} onDelete={onDelete} />);
 // let container, containerProp, childContainer, childContainerProps;
 
 describe('Component: userTable', () => {
   it('should utilize props', () => {
-    const wrapperNoProps = shallow(<UserTable handleDelete={handleDelete} />);
+    const wrapperNoProps = shallow(<UserTable onDelete={onDelete} />);
 
     expect(wrapper.state().users).toEqual(users);
     expect(wrapperNoProps.state().users).toBeNull();

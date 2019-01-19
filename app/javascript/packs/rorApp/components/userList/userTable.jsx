@@ -6,7 +6,14 @@ import { Link } from 'react-router-dom';
 // Components
 import UserItem from './userTable/userItem';
 
-class UserTable extends React.Component {
+export default class UserTable extends React.Component {
+  static propTypes = {
+    id: PropTypes.string,
+    key: PropTypes.string,
+    user: PropTypes.object,
+    onDelete: PropTypes.func.isRequired,
+  }
+
   constructor (props) {
     super(props);
     this.renderPopulatedTable = this.renderPopulatedTable.bind(this);
@@ -38,7 +45,7 @@ class UserTable extends React.Component {
 
       return (
         <UserItem key={id} id={id} user={user}
-         handleDelete={this.props.handleDelete} />
+         onDelete={this.props.onDelete} />
       );
     }, this);
 
@@ -74,9 +81,3 @@ class UserTable extends React.Component {
     );
   }
 }
-
-UserTable.propTypes = {
-  users: PropTypes.array,
-  handleDelete: PropTypes.func.isRequired
-};
-export default UserTable

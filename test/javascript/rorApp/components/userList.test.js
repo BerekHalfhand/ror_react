@@ -69,7 +69,7 @@ describe('Component: userList', () => {
     });
 
     it("should have onSubmit as prop", () => {
-      expect(typeof childContainerProps.handleDelete).toBe("function");
+      expect(typeof childContainerProps.onDelete).toBe("function");
     });
   });
 
