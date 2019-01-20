@@ -99,6 +99,7 @@ export default class TableCellContainer extends React.Component {
     if (this.type === 'select' && !this.props.isHead) {
       tableCell = (
         <TableCellSelect options={this.state.options}
+                      editable={this.state.editable}
                       column={this.props.column}
                       value={this.state.value}
                       newValue={this.state.newValue}
@@ -110,9 +111,10 @@ export default class TableCellContainer extends React.Component {
     } else {
       tableCell = (
         <TableCellDefault type={this.type}
+                editable={this.state.editable}
+                placeholder={this.props.column.title}
                 column={this.props.column}
                 value={this.state.value}
-                placeholder={this.props.column.title}
                 required={this.props.column.isRequired}
                 handleChange={this.handleChange}
                 handleKeyDown={this.handleKeyDown}

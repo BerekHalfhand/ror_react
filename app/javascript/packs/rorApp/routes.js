@@ -8,7 +8,7 @@ import Header from './components/header';
 import Sidebar from './components/sidebar';
 import LandingPage from './components/landingPage';
 import UserList from './components/userList';
-import Spreadsheet from './components/spreadsheet';
+import SpreadsheetContainer from './components/spreadsheetContainer';
 
 const App = (props) => (
   <Router>
@@ -18,7 +18,7 @@ const App = (props) => (
       <article id="app-body" className="main col-10 py-3">
         <Route exact path='/' component={LandingPage} />
         <Route exact path='/userList' component={UserList} />
-        <Route exact path='/spreadsheet' component={Spreadsheet} />
+        <Route exact path='/spreadsheet' component={SpreadsheetContainer} />
       </article>
     </div>
   </Router>
