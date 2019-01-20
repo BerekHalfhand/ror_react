@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 // import {Api} from '../middleware/api'
 
 // Components
-import TableCell from './tableCell';
+import TableCellContainer from './tableCellContainer';
 
 export default class TableRow extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ export default class TableRow extends React.Component {
       let values = this.state.row.values,
           value  = values && values[column.id] ? values[column.id] : ""; //0
       return (
-        <TableCell key={i} value={value} column={column} />
+        <TableCellContainer key={i} value={value} column={column} />
       );
     }, this);
   }

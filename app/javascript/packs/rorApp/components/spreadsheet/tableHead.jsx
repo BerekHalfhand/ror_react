@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 // import {Api} from '../middleware/api'
 
 // Components
-import TableCell from './tableCell';
+import TableCellContainer from './tableCellContainer';
 
 export default class TableHead extends React.Component {
   static propTypes = {
@@ -22,7 +22,7 @@ export default class TableHead extends React.Component {
   renderTitles() {
     return this.state.columns.map((column, i) => {
       return (
-        <TableCell key={i} value={column.title} column={column} isHead={true} />
+        <TableCellContainer key={i} value={column.title} column={column} isHead={true} />
       );
     }, this);
   }

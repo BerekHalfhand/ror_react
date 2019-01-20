@@ -36,14 +36,6 @@ export default class Spreadsheet extends React.Component {
     };
   }
 
-  componentDidMount() {
-
-  }
-
-  checkState() {
-    console.dir(this.state);
-  }
-
   //add a new column
   addColumn() {
     let columns = this.state.columns, i = this.state.columns.length+1;
@@ -84,7 +76,6 @@ export default class Spreadsheet extends React.Component {
         <h1>Spreadsheet</h1>
         <button type="button" className="btn btn-primary m-2" onClick={() => this.addRows(10)}>Add 10 rows</button>
         <button type="button" className="btn btn-secondary m-2" onClick={() => this.addColumn()}>Add column</button>
-        <button type="button" className="btn btn-light m-2" onClick={() => this.checkState()}>Check State</button>
 
         <table id="spreadsheet-table" className="table table-bordered table-striped">
           <thead>

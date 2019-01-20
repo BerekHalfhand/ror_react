@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from "prop-types"
 // import {Api} from '../middleware/api'
 
-export default class TableCell extends React.Component {
+// Components
+import TableCellDefault from './tableCellContainer/tableCellDefault';
+import TableCellSelect from './tableCellContainer/tableCellSelect';
+
+export default class TableCellContainer extends React.Component {
   static propTypes = {
     column: PropTypes.object.isRequired,  //column data
     isHead: PropTypes.bool,               //does this cell represent a column?
@@ -23,6 +27,7 @@ export default class TableCell extends React.Component {
     this.handleSubmit =   this.handleSubmit.bind(this);
     this.handleKeyDown =  this.handleKeyDown.bind(this);
     this.handleSelect =   this.handleSelect.bind(this);
+    this.handleClick =    this.handleClick.bind(this);
   }
 
   //adding an empty option for each 'select' column
@@ -89,46 +94,36 @@ export default class TableCell extends React.Component {
     });
   }
 
-  renderForm() {
-    let input, optionsNodes, options;
+  render() {
+    let tableCell;
     if (this.type === 'select' && !this.props.isHead) {
-
-      optionsNodes = this.state.options.map((option, i) => {
-        return (
-          <option key={i} value={option}>{option}</option>
-        );
-      }, this);
-
-      //for type: select
-      input = (
-        <select onChange={this.handleSelect}
-          value={this.state.newValue}
-          required={this.props.column.isRequired} >
-          {optionsNodes}
-        </select>
-      );
+      tableCell = (
+        <TableCellSelect options={this.state.options}
+                      column={this.props.column}
+                      value={this.state.value}
+                      newValue={this.state.newValue}
+                      required={this.props.column.isRequired}
+                      handleSelect={this.handleSelect}
+                      handleClick={this.handleClick}
+                      handleSubmit={this.handleSubmit} />
+              );
     } else {
-      //for other types
-      input = <input type={this.type}
-                onChange={this.handleChange}
-                onKeyDown={this.handleKeyDown}
+      tableCell = (
+        <TableCellDefault type={this.type}
+                column={this.props.column}
+                value={this.state.value}
                 placeholder={this.props.column.title}
                 required={this.props.column.isRequired}
-                defaultValue={this.state.value} />
+                handleChange={this.handleChange}
+                handleKeyDown={this.handleKeyDown}
+                handleClick={this.handleClick}
+                handleSubmit={this.handleSubmit} />
+              );
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        {input}
-        <button type="submit" className="btn btn-primary m-1">Ok</button>
-      </form>
-    )
-  }
-
-  render() {
-    return(
-      <td className={!this.state.editable ? "editable" : ""} onClick={() => this.handleClick()} >
-        {this.state.editable ? this.renderForm() : this.state.value}
+      <td className={!this.state.editable ? "editable" : ""} onClick={this.handleClick} >
+        {tableCell}
       </td>
     )
   }
