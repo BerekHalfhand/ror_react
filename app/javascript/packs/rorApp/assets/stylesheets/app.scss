@@ -32,6 +32,20 @@ $header-height: 80px;
   }
 }
 
+#spreadsheet-table {
+  tr, td {
+    height: 65px;
+  }
+
+  .editable {
+    cursor: pointer;
+  }
+
+  .row-number, th {
+    width: 30px;
+  }
+}
+
 .grow {
     flex: 1;
 }

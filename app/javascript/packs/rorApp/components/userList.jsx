@@ -88,7 +88,7 @@ export default class UserList extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input id="username" onChange={this.handleChange} ref="username" placeholder="Username" className="d-block mb-1"/>
           <input id="fullname" onChange={this.handleChange} ref="fullname" placeholder="Full Name" className="d-block mb-1"/>
-          <input id="password" onChange={this.handleChange} ref="password" placeholder="Password" className="d-block mb-1 foo"/>
+          <input id="password" onChange={this.handleChange} ref="password" placeholder="Password" className="d-block mb-1"/>
           <input id="email" onChange={this.handleChange} ref="email" placeholder="Email" className="d-block mb-1"/>
           <button type="submit" className="btn btn-primary mt-1">New User</button>
         </form>
