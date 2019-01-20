@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TableCellDefault = props => (
   <React.Fragment>
@@ -15,5 +16,11 @@ const TableCellDefault = props => (
       props.value }
   </React.Fragment>
 )
+
+TableCellDefault.propTypes = {
+  type: PropTypes.string.isRequired,
+  required: PropTypes.bool.isRequired,
+  //...
+}
 
 export default TableCellDefault

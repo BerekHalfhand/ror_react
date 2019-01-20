@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TableCellSelect = props => (
   <React.Fragment>
@@ -16,7 +17,13 @@ const TableCellSelect = props => (
       <button type="submit" className="btn btn-primary m-1">Ok</button>
     </form> :
     props.value }
-    </React.Fragment>
-  )
+  </React.Fragment>
+)
+
+TableCellSelect.propTypes = {
+  options: PropTypes.array.isRequired,
+  required: PropTypes.bool.isRequired,
+  //...
+}
 
 export default TableCellSelect
