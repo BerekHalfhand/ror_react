@@ -29,9 +29,9 @@ export default class Spreadsheet extends React.Component {
       ],
       columns: [
         {id: 'c1', title: 'String', type: 'text',   isRequired: true},
-        {id: 'c2', title: 'Number', type: 'number', isRequired: false},
-        {id: 'c3', title: 'Date',   type: 'date',   isRequired: false},
-        {id: 'c4', title: 'Select', type: 'select', options: ['opt1', 'opt2', 'opt3']},
+        {id: 'c2', title: 'Number', type: 'number', isRequired: true},
+        {id: 'c3', title: 'Date',   type: 'date',   isRequired: true},
+        {id: 'c4', title: 'Select', type: 'select', isRequired: true, options: ['opt1', 'opt2', 'opt3']},
       ],
     };
   }

@@ -15,8 +15,10 @@ export default class TableCell extends React.Component {
       editable:   false,
       value:      this.props.value || this.props.column.value,
       newValue:   this.props.value || this.props.column.value,
-      type:       this.props.isHead ? 'text' : this.props.column.type,
     };
+
+    this.type = this.props.isHead ? 'text' : this.props.column.type;
+
     this.handleChange =   this.handleChange.bind(this);
     this.handleSubmit =   this.handleSubmit.bind(this);
     this.handleKeyDown =  this.handleKeyDown.bind(this);
@@ -25,7 +27,7 @@ export default class TableCell extends React.Component {
 
   //adding an empty option for each 'select' column
   componentDidMount() {
-    if (this.state.type === 'select' && this.props.column.options) {
+    if (this.type === 'select' && this.props.column.options) {
       let options = this.props.column.options.slice(0);
       if (options[0] != '') options.unshift('');
 
@@ -57,9 +59,10 @@ export default class TableCell extends React.Component {
   //Submit form handler, except for type: select
   handleSubmit(event) {
     // console.log("TableCell::handleSubmit");
-    let value = this.state.newValue;
-    console.log(value);
     event.preventDefault();
+    let value = this.state.newValue;
+
+    // console.log(`value: ${value}`);
     this.setState({
       value: value,
       editable: false
@@ -88,7 +91,7 @@ export default class TableCell extends React.Component {
 
   renderForm() {
     let input, optionsNodes, options;
-    if (this.state.type === 'select' && !this.props.isHead) {
+    if (this.type === 'select' && !this.props.isHead) {
 
       optionsNodes = this.state.options.map((option, i) => {
         return (
@@ -98,13 +101,20 @@ export default class TableCell extends React.Component {
 
       //for type: select
       input = (
-        <select onChange={this.handleSelect} value={this.state.newValue}>
+        <select onChange={this.handleSelect}
+          value={this.state.newValue}
+          required={this.props.column.isRequired} >
           {optionsNodes}
         </select>
       );
     } else {
       //for other types
-      input = <input type={this.state.type} onChange={this.handleChange} onKeyDown={this.handleKeyDown} defaultValue={this.state.value} />
+      input = <input type={this.type}
+                onChange={this.handleChange}
+                onKeyDown={this.handleKeyDown}
+                placeholder={this.props.column.title}
+                required={this.props.column.isRequired}
+                defaultValue={this.state.value} />
     }
 
     return (
