@@ -11,7 +11,7 @@ import App from './app'
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
-      <App />
+      <Route path="/" component={App} />
     </Router>
   </Provider>
 )
