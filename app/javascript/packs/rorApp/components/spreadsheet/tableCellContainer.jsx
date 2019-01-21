@@ -1,13 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { editField } from '../../actions/index'
 // import {Api} from '../middleware/api'
 
 // Components
 import TableCellDefault from './tableCellContainer/tableCellDefault';
 import TableCellSelect from './tableCellContainer/tableCellSelect';
 
-export default class TableCellContainer extends React.Component {
+class TableCellContainer extends React.Component {
   static propTypes = {
     column: PropTypes.object.isRequired,  //column data
     isHead: PropTypes.bool,               //does this cell represent a column?
@@ -65,11 +67,13 @@ export default class TableCellContainer extends React.Component {
   handleSubmit(event) {
     // console.log("TableCell::handleSubmit");
     event.preventDefault();
-    let value = this.state.newValue;
+
+    this.props.editField( this.props.isHead ? false : this.props.row.id,
+                          this.props.column,
+                          this.state.newValue );
 
     // console.log(`value: ${value}`);
     this.setState({
-      value: value,
       editable: false
     });
   }
@@ -101,7 +105,7 @@ export default class TableCellContainer extends React.Component {
         <TableCellSelect options={this.state.options}
                       editable={this.state.editable}
                       column={this.props.column}
-                      value={this.state.value}
+                      value={this.props.value}
                       newValue={this.state.newValue}
                       required={this.props.column.isRequired}
                       handleSelect={this.handleSelect}
@@ -114,7 +118,7 @@ export default class TableCellContainer extends React.Component {
                 editable={this.state.editable}
                 placeholder={this.props.column.title}
                 column={this.props.column}
-                value={this.state.value}
+                value={this.props.value}
                 required={this.props.column.isRequired}
                 handleChange={this.handleChange}
                 handleKeyDown={this.handleKeyDown}
@@ -130,3 +134,7 @@ export default class TableCellContainer extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({ ...state });
+
+export default connect(mapStateToProps, {editField})(TableCellContainer)

@@ -1,5 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 const TableCellSelect = props => (
   <React.Fragment>
@@ -21,9 +22,11 @@ const TableCellSelect = props => (
 )
 
 TableCellSelect.propTypes = {
-  options: PropTypes.array.isRequired,
+  options: PropTypes.array,
   required: PropTypes.bool.isRequired,
   //...
 }
 
-export default TableCellSelect
+const mapStateToProps = state => ({ ...state });
+
+export default connect(mapStateToProps)(TableCellSelect)

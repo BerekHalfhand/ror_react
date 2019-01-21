@@ -3,26 +3,21 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import Header from './components/header';
-import Sidebar from './components/sidebar';
-import LandingPage from './components/landingPage';
-import UserList from './components/userList';
-import SpreadsheetContainer from './components/spreadsheetContainer';
+import App from './app'
 
-const App = (props) => (
-  <Router>
-    <div className="row layout">
-      <Header />
-      <Sidebar/>
-      <article id="app-body" className="main col-10 py-3">
-        <Route exact path='/' component={LandingPage} />
-        <Route exact path='/userList' component={UserList} />
-        <Route exact path='/spreadsheet' component={SpreadsheetContainer} />
-      </article>
-    </div>
-  </Router>
-
+const Root = ({ store }) => (
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 )
 
-export default App;
+Root.propTypes = {
+  store: PropTypes.object.isRequired
+}
+
+export default Root;

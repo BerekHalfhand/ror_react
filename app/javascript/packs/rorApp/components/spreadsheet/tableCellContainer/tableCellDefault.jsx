@@ -1,5 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 const TableCellDefault = props => (
   <React.Fragment>
@@ -19,8 +20,10 @@ const TableCellDefault = props => (
 
 TableCellDefault.propTypes = {
   type: PropTypes.string.isRequired,
-  required: PropTypes.bool.isRequired,
+  required: PropTypes.bool,
   //...
 }
 
-export default TableCellDefault
+const mapStateToProps = state => ({ ...state });
+
+export default connect(mapStateToProps)(TableCellDefault)
