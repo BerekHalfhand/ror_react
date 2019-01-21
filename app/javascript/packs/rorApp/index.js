@@ -30,8 +30,8 @@ const data = {
 }
 
 const store = createStore(
-  App, data,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  App, data,    //remove initial population here
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  //for Redux Dev Tools browser addon
 )
 
 document.addEventListener('DOMContentLoaded', () => {

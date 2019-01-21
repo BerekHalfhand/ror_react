@@ -8,9 +8,18 @@ import {
 function columns(state = [], action) {
   switch (action.type) {
     case ADD_COLUMN:
-      // console.log('addColumn action -> ', action)
-      let i = state.length+1;
-      let column = {id: `c${i}`, title: `Title ${i}`, type: 'string'}
+      console.log('addColumn action -> ', action)
+      let i = state.length+1,
+          column = action.payload.column,
+          options = action.payload.column.options.split(',')
+
+      column = {
+        id: `c${i}`,
+        title: column.title,
+        isRequired: column.isRequired,
+        type: column.type,
+        options: options,
+      }
 
       let newState = state.slice(0)
       newState.push(column)
