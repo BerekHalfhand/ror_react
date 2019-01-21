@@ -55,11 +55,10 @@ const NewColumn = props => (
   </React.Fragment>
 )
 
-// NewColumn.propTypes = {
-//   columns: PropTypes.array,           //all the columns in the table
-//   //...
-// }
-//
-const mapStateToProps = state => ({ ...state });
+NewColumn.propTypes = {
+  showOptions: PropTypes.bool,              //for 'select' types
+  handleSubmit: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+}
 
-export default connect(mapStateToProps)(NewColumn)
+export default NewColumn

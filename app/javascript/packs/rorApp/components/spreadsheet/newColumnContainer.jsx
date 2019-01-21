@@ -24,15 +24,16 @@ class NewColumnContainer extends React.Component {
 
   handleSubmit (event) {
       event.preventDefault();
-      // setState({showForm: !state.showForm})
-      console.dir(this.state)
+
       let column = {
         title: this.state.title,
         isRequired: this.state.isRequired,
         type: this.state.type,
         options: this.state.options,
       }
+
       this.props.addColumn(column)
+      this.props.hideForm()
     }
 
     handleChange (event) {
@@ -40,27 +41,18 @@ class NewColumnContainer extends React.Component {
           value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
       this.setState({ [key]: value })
-      // console.dir(this.state)
       if (key == 'type') this.setState({showOptions: value == 'select'})
-      // console.dir(this.state)
-      console.log(key, value)
+      // console.log(key, value)
     }
 
   render() {
-    return (
-      <React.Fragment>
-        <NewColumn handleSubmit={this.handleSubmit} handleChange={this.handleChange} showOptions={this.state.showOptions}/>
-
-
-      </React.Fragment>
-    )
+    return <NewColumn handleSubmit={this.handleSubmit} handleChange={this.handleChange} showOptions={this.state.showOptions}/>
   }
 }
 
-// NewColumn.propTypes = {
-//   columns: PropTypes.array,           //all the columns in the table
-//   //...
-// }
+NewColumnContainer.propTypes = {
+  hideForm: PropTypes.func,
+}
 
 const mapStateToProps = state => ({ ...state });
 
