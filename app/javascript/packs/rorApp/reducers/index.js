@@ -1,6 +1,9 @@
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import rows from './rows'
 import columns from './columns'
+import {fetchPosts} from '../actions'
 
 const initialState = {
   rows: [
@@ -28,15 +31,22 @@ const initialState = {
   ],
 }
 
-const App = combineReducers({
+const rootReducer = combineReducers({
   columns,
   rows,
 })
 
 const store = createStore(
-  App,
+  rootReducer,
   initialState,    //remove initial population here
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  //for Redux Dev Tools browser addon
+  composeWithDevTools(
+    applyMiddleware(
+      thunkMiddleware, // lets us dispatch() functions
+    )
+  )
 )
+
+store.dispatch(fetchPosts('reactjs')).then(() => console.log(store.getState()))
+
 
 export default store

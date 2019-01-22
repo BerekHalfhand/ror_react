@@ -1,3 +1,5 @@
+import fetch from 'cross-fetch'
+
 export const COLUMNS_FETCH  = 'COLUMNS_FETCH'
 export const COLUMNS_ADD    = 'COLUMNS_ADD'
 export const COLUMNS_EDIT   = 'COLUMNS_EDIT'
@@ -41,3 +43,20 @@ export const editRow = (row, column, value) => ({
     value
   }
 })
+
+export function fetchPosts(subreddit) {
+  return function(dispatch) {
+    return fetch(`/api/v1/user.json`)
+      .then(
+        response => response.json(),
+
+        error => console.log('An error occurred.', error)
+      )
+      .then(json => {
+        dispatch(addRows(1))
+        console.log(json)
+        //dispatch(receivePosts(subreddit, json))
+      } 
+    )
+  }
+}
