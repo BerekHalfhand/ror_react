@@ -1,69 +1,31 @@
-import { combineReducers } from 'redux'
-import {
-  ADD_COLUMN,
-  ADD_ROW,
-  EDIT_FIELD,
-} from '../actions/index'
+import { combineReducers, createStore } from 'redux'
+import rows from './rows'
+import columns from './columns'
 
-function columns(state = [], action) {
-  switch (action.type) {
-    case ADD_COLUMN:
-      console.log('addColumn action -> ', action)
-      let i = state.length+1,
-          column = action.payload.column,
-          options = action.payload.column.options.split(',')
-
-      column = {
-        id: `c${i}`,
-        title: column.title,
-        isRequired: column.isRequired,
-        type: column.type,
-        options: options,
-      }
-
-      let newState = state.slice(0)
-      newState.push(column)
-
-      return newState
-    default:
-      return state
-  }
-}
-
-function rows(state = [], action) {
-  let newState = []
-  switch (action.type) {
-    case ADD_ROW:
-      // console.log('addRows action -> ', action)
-      let {quantity} = action.payload,
-          l = state.length+1,
-          newRow
-
-      newState = state.slice(0)
-
-      for (let i = l; i < l + quantity; i++) {
-        newRow = {id: `r${i}`, values: {}}
-        newState.push(newRow)
-      }
-
-      return newState
-    case EDIT_FIELD:
-      // console.log('editField action -> ', action)
-      let {row, column, value} = action.payload
-      if (column.type === 'number') value = parseInt(value)
-
-      state.forEach((v, i) => {
-        if (v.id === row)
-          if (v.values)
-            v.values[column.id] = value
-
-        newState.push(v);
-      })
-
-      return newState
-    default:
-      return state
-  }
+const initialState = {
+  rows: [
+    {id: 'r1', values: {
+      'c1': 'John',
+      'c2': 25,
+    }},
+    {id: 'r2', values: {
+      'c1': 'Mary',
+      'c2': 19,
+      'c3': '2019-01-09',
+      'c4': 'Female',
+    }},
+    {id: 'r3', values: {
+      'c1': 'Bill',
+      'c2': 37,
+      'c4': 'Male',
+    }},
+  ],
+  columns: [
+    {id: 'c1', title: 'Name', type: 'text',   isRequired: true},
+    {id: 'c2', title: 'Level', type: 'number', isRequired: true},
+    {id: 'c3', title: 'Birthsday',   type: 'date',   isRequired: false},
+    {id: 'c4', title: 'Sex', type: 'select', isRequired: true, options: ['Male', 'Female']},
+  ],
 }
 
 const App = combineReducers({
@@ -71,4 +33,10 @@ const App = combineReducers({
   rows,
 })
 
-export default App
+const store = createStore(
+  App,
+  initialState,    //remove initial population here
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  //for Redux Dev Tools browser addon
+)
+
+export default store

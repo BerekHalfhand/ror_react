@@ -1,6 +1,9 @@
-export const ADD_COLUMN = 'ADD_COLUMN'
-export const ADD_ROW = 'ADD_ROW'
-export const EDIT_FIELD = 'EDIT_FIELD'
+export const COLUMNS_FETCH  = 'COLUMNS_FETCH'
+export const COLUMNS_ADD    = 'COLUMNS_ADD'
+export const COLUMNS_EDIT   = 'COLUMNS_EDIT'
+export const ROWS_FETCH     = 'ROWS_FETCH'
+export const ROWS_ADD       = 'ROWS_ADD'
+export const ROWS_EDIT      = 'ROWS_EDIT'
 
 /*
  * action creators
@@ -10,28 +13,28 @@ export const EDIT_FIELD = 'EDIT_FIELD'
 //   console.log('addColumn action -> ', column)
 //   return (dispatch) => {
 //     dispatch({
-//       type: ADD_COLUMN,
+//       type: COLUMNS_ADD,
 //       column: column,
 //     });
 //   };
 // }
 
 export const addColumn = column => ({
-  type: ADD_COLUMN,
+  type: COLUMNS_ADD,
   payload: {
     column
   }
 })
 
 export const addRows = quantity => ({
-  type: ADD_ROW,
+  type: ROWS_ADD,
   payload: {
     quantity
   }
 })
 
-export const editField = (row, column, value) => ({
-  type: EDIT_FIELD,
+export const editRow = (row, column, value) => ({
+  type: ROWS_EDIT,
   payload: {
     row,
     column,

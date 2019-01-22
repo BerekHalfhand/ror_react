@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { editField } from '../../actions/index'
+import { editRow } from '../../actions'
 // import {Api} from '../middleware/api'
 
 // Components
@@ -68,7 +68,7 @@ class TableCellContainer extends React.Component {
     // console.log("TableCell::handleSubmit");
     event.preventDefault();
 
-    this.props.editField( this.props.isHead ? false : this.props.row.id,
+    this.props.editRow( this.props.isHead ? false : this.props.row.id,
                           this.props.column,
                           this.state.newValue );
 
@@ -137,4 +137,4 @@ class TableCellContainer extends React.Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default connect(mapStateToProps, {editField})(TableCellContainer)
+export default connect(mapStateToProps, {editRow})(TableCellContainer)
