@@ -1,42 +1,68 @@
 import {
   ROWS_FETCH,
-  ROWS_ADD,
-  ROWS_EDIT,
+  ROWS_ADD_REQUEST,
+  ROWS_ADD_SUCCESS,
+  ROWS_ADD_FAILURE,
+  ROWS_EDIT_REQUEST,
+  ROWS_EDIT_SUCCESS,
+  ROWS_EDIT_FAILURE,
 } from '../actions'
 
 function rows(state = [], action) {
-  let newState = []
+  let items = []
   switch (action.type) {
     case ROWS_FETCH:
-      return state
-    case ROWS_ADD:
-      // console.log('addRows action -> ', action)
-      let {quantity} = action.payload,
-          l = state.length+1,
-          newRow
+      let {data} = action.payload
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: data,
+      })
+    case ROWS_ADD_SUCCESS:
+      // console.log('addRowsSuccess action -> ', action)
+      let {response} = action.payload
 
-      newState = state.slice(0)
+      if (state.items) items = state.items.slice(0)
 
-      for (let i = l; i < l + quantity; i++) {
-        newRow = {id: `r${i}`, values: {}}
-        newState.push(newRow)
-      }
+      items = items.concat(response)
 
-      return newState
-    case ROWS_EDIT:
-      console.log('editField action -> ', action)
-      let {row, column, value} = action.payload
-      if (column.type === 'number') value = parseInt(value)
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: items,
+      })
+    case ROWS_EDIT_SUCCESS:
+      console.log('editRowsSuccess action -> ', action)
+      let updatedRow = action.payload.response
+      // let {row, column, value} = action.payload
+      // newState = {
+      //   isFetching: false,
+      //   items: [],
+      // }
+      // if (column.type === 'number') value = parseInt(value)
+      //
+      state.items.forEach((v, i) => {
+        if (v._id.$oid === updatedRow._id.$oid) v.values = updatedRow.values
 
-      state.forEach((v, i) => {
-        if (v.id === row)
-          if (v.values)
-            v.values[column.id] = value
-
-        newState.push(v);
+        items.push(v);
       })
 
-      return newState
+      // console.dir(items)
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: items,
+      })
+    case ROWS_ADD_REQUEST:
+    case ROWS_EDIT_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      })
+    case ROWS_ADD_FAILURE:
+    case ROWS_EDIT_FAILURE:
+      let {error} = action.payload
+      console.log('An error occurred.', action)
+
+      return Object.assign({}, state, {
+        isFetching: false,
+      })
     default:
       return state
   }

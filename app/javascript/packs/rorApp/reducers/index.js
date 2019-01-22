@@ -3,26 +3,13 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rows from './rows'
 import columns from './columns'
-import {fetchPosts} from '../actions'
+import {fetchRows} from '../actions'
 
 const initialState = {
-  rows: [
-    {id: 'r1', values: {
-      'c1': 'John',
-      'c2': 25,
-    }},
-    {id: 'r2', values: {
-      'c1': 'Mary',
-      'c2': 19,
-      'c3': '2019-01-09',
-      'c4': 'Female',
-    }},
-    {id: 'r3', values: {
-      'c1': 'Bill',
-      'c2': 37,
-      'c4': 'Male',
-    }},
-  ],
+  rows: {
+    isFetching: true,
+    items: []
+  },
   columns: [
     {id: 'c1', title: 'Name', type: 'text',   isRequired: true},
     {id: 'c2', title: 'Level', type: 'number', isRequired: true},
@@ -46,7 +33,7 @@ const store = createStore(
   )
 )
 
-store.dispatch(fetchPosts('reactjs')).then(() => console.log(store.getState()))
+store.dispatch(fetchRows()).then(() => console.log(store.getState()))
 
 
 export default store

@@ -26,6 +26,7 @@ class Spreadsheet extends React.Component {
   }
 
   render() {
+    let rows = this.props.rows || null
     return (
       <React.Fragment>
         <h1>Spreadsheet</h1>
@@ -40,8 +41,8 @@ class Spreadsheet extends React.Component {
             <TableHead columns={this.props.columns} />
           </thead>
           <tbody>
-            {this.props.rows && this.props.rows.map((row, i) => {
-              return (<TableRow key={row.id} num={++i} row={row} columns={this.props.columns}/>);
+            {rows && rows.items.map((row, i) => { // !rows.isFetching &&
+              return row._id ? (<TableRow key={row._id.$oid} num={++i} row={row} columns={this.props.columns}/>) : null;
             }, this)}
           </tbody>
         </table>
