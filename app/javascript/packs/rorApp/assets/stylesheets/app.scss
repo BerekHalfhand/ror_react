@@ -38,10 +38,14 @@ $header-height: 80px;
     vertical-align: middle;
   }
 
+  td>form {
+    display: inline-block;
+  }
+
   tr, td {
     height: 65px;
   }
-  
+
   .row-number, th {
     width: 30px;
   }

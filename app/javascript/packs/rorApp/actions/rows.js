@@ -6,6 +6,7 @@ export const ROWS_EDIT_REQUEST  = 'ROWS_EDIT_REQUEST'
 export const ROWS_EDIT_SUCCESS  = 'ROWS_EDIT_SUCCESS'
 export const ROWS_EDIT_FAILURE  = 'ROWS_EDIT_FAILURE'
 
+// Action creators
 export const receiveRows = data => ({
   type: ROWS_FETCH,
   payload: {
@@ -73,7 +74,7 @@ export function addRows(quantity) {
 export function editRows(id, column, value) {
   return function(dispatch) {
     dispatch(editRowsRequest())
-    
+
     return $.ajax({
       url: "/api/v1/row/"+id,
       type: "PATCH",

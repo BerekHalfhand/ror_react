@@ -6,7 +6,7 @@ export const COLUMNS_EDIT_REQUEST  = 'COLUMNS_EDIT_REQUEST'
 export const COLUMNS_EDIT_SUCCESS  = 'COLUMNS_EDIT_SUCCESS'
 export const COLUMNS_EDIT_FAILURE  = 'COLUMNS_EDIT_FAILURE'
 
-
+// Action creators
 export const receiveColumns = data => ({
   type: COLUMNS_FETCH,
   payload: {

@@ -10,6 +10,7 @@ import {
 
 function columns(state = [], action) {
   let items = []
+  
   switch (action.type) {
     case COLUMNS_FETCH:
       let {data} = action.payload
@@ -17,6 +18,7 @@ function columns(state = [], action) {
         isFetching: false,
         items: data,
       })
+
     case COLUMNS_ADD_SUCCESS:
       // console.log('addColumnsSuccess action -> ', action)
       let {response} = action.payload
@@ -62,6 +64,7 @@ function columns(state = [], action) {
       return Object.assign({}, state, {
         isFetching: false,
       })
+
     default:
       return state
   }

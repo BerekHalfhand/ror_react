@@ -32,8 +32,17 @@ class TableCellContainer extends React.Component {
   handleClick() {
     if (!this.state.editable)
       this.setState({
-        editable: true
+        editable: true,
+        showFilter: false,
       })
+  }
+
+  handleFilterClick(event) {
+    event.stopPropagation()
+    console.log('handleFilterClick')
+    this.setState({
+      showFilter: !this.state.showFilter,
+    })
   }
 
   //Input change handler, except for type: select
@@ -107,10 +116,13 @@ class TableCellContainer extends React.Component {
                       handleSubmit={this.handleSubmit} />
       )
     }
+    let filter = <button type="button" className="btn btn-secondary touch m-2 position-absolute"
+                    onClick={(event) => {this.handleFilterClick(event)}}>{this.state.showFilter ? 'X' : '?'}</button>
 
     return (
-      <td className={!this.state.editable ? "touch" : ""} onClick={this.handleClick} >
+      <td className={(!this.state.editable ? "touch position" : "") + "position-relative"} onClick={this.handleClick} >
         {tableCell}
+        {this.props.isHead ? filter : null}
       </td>
     )
   }

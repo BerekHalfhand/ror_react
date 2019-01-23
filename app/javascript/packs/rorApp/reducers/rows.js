@@ -10,6 +10,7 @@ import {
 
 function rows(state = [], action) {
   let items = []
+
   switch (action.type) {
     case ROWS_FETCH:
       let {data} = action.payload
