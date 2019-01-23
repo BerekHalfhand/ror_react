@@ -2,9 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import {Api} from '../middleware/api'
-
-// Components
 
 const NewColumn = props => (
   <React.Fragment>
@@ -56,7 +53,7 @@ const NewColumn = props => (
 )
 
 NewColumn.propTypes = {
-  showOptions: PropTypes.bool,              //for 'select' types
+  showOptions:  PropTypes.bool,              //for 'select' types
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 }

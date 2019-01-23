@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import {Api} from '../middleware/api'
 
 // Components
 import TableCellContainer from './tableCellContainer';
@@ -13,7 +12,7 @@ const TableRow = props => (
     {props.columns && props.columns.items && props.columns.items.map((column, i) => {
       let values = props.row.values,
           columnId = column && column._id && column._id.$oid,
-          value  = values && values[columnId] ? values[columnId] : ""; //0
+          value  = values && values[columnId] ? values[columnId] : "";
       return (
         <TableCellContainer key={i} value={value} row={props.row} column={column} />
       );
@@ -24,10 +23,9 @@ const TableRow = props => (
 TableRow.propTypes = {
   num: PropTypes.number,              //number for the first cell in a row
   row: PropTypes.object.isRequired,   //row data
-  columns: PropTypes.object,           //all the columns in the table
-  //...
+  columns: PropTypes.object,          //all the columns in the table
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({ ...state })
 
 export default connect(mapStateToProps)(TableRow)

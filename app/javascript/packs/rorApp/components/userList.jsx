@@ -1,83 +1,81 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 import {Api} from '../middleware/api'
+import autoBind from 'react-autobind'
 
 // Components
-import UserTable from './userList/userTable';
+import UserTable from './userList/userTable'
 
 export default class UserList extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       users: props.users || null,
       newUser: {},
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.removeUser = this.removeUser.bind(this);
+    }
+    autoBind(this)
   }
 
   handleSubmit(event, newUser) {
-  // console.log("handleSubmit");
-    event.preventDefault();
-    newUser = newUser || this.state.newUser;
+  // console.log("handleSubmit")
+    event.preventDefault()
+    newUser = newUser || this.state.newUser
 
     if (!newUser || !newUser.username)
-      return false;
+      return false
 
     Api.createUser(newUser)
     .done(response => {
-        console.log('then');
-        console.dir(response);
-        let newUsers = this.state.users;
-        newUsers.push(response);
+        console.log('then')
+        console.dir(response)
+        let newUsers = this.state.users
+        newUsers.push(response)
         this.setState({
           users: newUsers
-        });
-        return response;
-    });
+        })
+        return response
+    })
 
-    return true;
+    return true
   }
 
   handleChange(event) {
-    // console.log(`handleChange: ${event.target.id}, ${event.target.value}`);
-    let field = {[event.target.id]: event.target.value};
+    // console.log(`handleChange: ${event.target.id}, ${event.target.value}`)
+    let field = {[event.target.id]: event.target.value}
     this.setState({
       newUser: {...this.state.newUser, ...field}
-    });
+    })
   }
 
   removeUser (id) {
     var newUsers = this.state.users.filter((user) => {
-      return user._id.$oid != id;
-    });
+      return user._id.$oid != id
+    })
 
-    this.setState({ users: newUsers });
+    this.setState({ users: newUsers })
   }
 
   handleDelete (id) {
-    // console.log("handleDelete ", id);
+    // console.log("handleDelete ", id)
     Api.deleteUser(id)
     .done(response => {
-      this.removeUser(id);
+      this.removeUser(id)
     })
   }
 
   checkState() {
-    console.dir(this.state);
+    console.dir(this.state)
   }
 
   componentDidMount() {
     if (!this.state.users)
       Api.getUsers()
       .done(response => {
-        console.log(`Loaded ${response.length} users`);
+        console.log(`Loaded ${response.length} users`)
         this.setState({
           users: response,
-        });
-      });
+        })
+      })
   }
 
   render() {

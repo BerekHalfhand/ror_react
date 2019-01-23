@@ -3,5 +3,5 @@ class Column
   field :title, type: String
   field :type, type: String
   field :isRequired, type: Mongoid::Boolean
-  field :options, type: Array#, default: []
+  field :options, type: Array
 end

@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
 import { addColumns } from '../../actions'
 
-// import {Api} from '../middleware/api'
-
 // Components
 import NewColumn from './newColumnContainer/newColumn'
 
@@ -23,10 +21,14 @@ class NewColumnContainer extends React.Component {
   }
 
   handleSubmit (event) {
-      event.preventDefault();
+      event.preventDefault()
 
       let options = []
       if (this.state.options) options = this.state.options.split(',')
+
+      options = options.map(function(item) {
+        return item.trim();
+      });
 
       let column = {
         title: this.state.title,
@@ -41,11 +43,10 @@ class NewColumnContainer extends React.Component {
 
     handleChange (event) {
       let key = event.target.name,
-          value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+          value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
 
       this.setState({ [key]: value })
       if (key == 'type') this.setState({showOptions: value == 'select'})
-      // console.log(key, value)
     }
 
   render() {
@@ -57,6 +58,6 @@ NewColumnContainer.propTypes = {
   hideForm: PropTypes.func,
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({ ...state })
 
 export default connect(mapStateToProps, { addColumns })(NewColumnContainer)

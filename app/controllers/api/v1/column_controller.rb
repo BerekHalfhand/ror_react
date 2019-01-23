@@ -8,10 +8,10 @@ class Api::V1::ColumnController < Api::V1::BaseController
     respond_with :api, :v1, Column.create(column_params)
   end
 
-  # def destroy
-  #   column = Column.find(params["id"])
-  #   respond_with column.destroy()
-  # end
+  def destroy
+    column = Column.find(params["id"])
+    respond_with column.destroy()
+  end
 
   def update
     puts column_params

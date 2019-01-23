@@ -9,24 +9,31 @@ const TableCellSelect = props => (
       <select onChange={props.handleSelect}
         value={props.newValue}
         required={props.column.isRequired} >
+          <option value=""></option>
           {props.options.map((option, i) => {
             return (
               <option key={i} value={option}>{option}</option>
             );
           }, this)}
       </select>
-      <button type="submit" className="btn btn-primary m-1">Ok</button>
+      <button type="submit" className="btn btn-primary touch m-1">Ok</button>
     </form> :
     props.value }
   </React.Fragment>
 )
 
 TableCellSelect.propTypes = {
-  options: PropTypes.array,
-  required: PropTypes.bool.isRequired,
-  //...
+  options:      PropTypes.array.isRequired,
+  required:     PropTypes.bool.isRequired,
+  column:       PropTypes.object.isRequired,
+  value:        PropTypes.string,
+  newValue:     PropTypes.string,
+  editable:     PropTypes.bool,
+  handleSelect: PropTypes.func.isRequired,
+  handleClick:  PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({ ...state })
 
 export default connect(mapStateToProps)(TableCellSelect)

@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import autoBind from 'react-autobind'
 import { editRows, editColumns } from '../../actions'
-// import {Api} from '../middleware/api'
 
 // Components
-import TableCellDefault from './tableCellContainer/tableCellDefault';
-import TableCellSelect from './tableCellContainer/tableCellSelect';
+import TableCellDefault from './tableCellContainer/tableCellDefault'
+import TableCellSelect from './tableCellContainer/tableCellSelect'
 
 class TableCellContainer extends React.Component {
   static propTypes = {
@@ -16,60 +16,39 @@ class TableCellContainer extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       editable:   false,
       value:      this.props.value || this.props.column.value,
       newValue:   this.props.value || this.props.column.value,
-    };
-
-    this.type = this.props.isHead ? 'text' : this.props.column.type;
-
-    this.handleChange =   this.handleChange.bind(this);
-    this.handleSubmit =   this.handleSubmit.bind(this);
-    this.handleKeyDown =  this.handleKeyDown.bind(this);
-    this.handleSelect =   this.handleSelect.bind(this);
-    this.handleClick =    this.handleClick.bind(this);
-  }
-
-  //adding an empty option for each 'select' column
-  componentDidMount() {
-    if (this.type === 'select' && this.props.column.options) {
-      let options = this.props.column.options.slice(0);
-      if (options[0] != '') options.unshift('');
-
-      this.setState({
-        options: options
-      });
     }
+
+    this.type = this.props.isHead ? 'text' : this.props.column.type
+
+    autoBind(this)
   }
 
   //Cell click handler
   handleClick() {
-    // console.log('TableCell::handleClick');
     if (!this.state.editable)
       this.setState({
         editable: true
-      });
+      })
   }
 
   //Input change handler, except for type: select
   handleChange(event) {
-    // console.log("TableCell::handleChange");
-    let value = event.target.value;
-    // console.log(value);
+    let value = event.target.value
     this.setState({
       newValue: value
-    });
+    })
   }
 
   //Submit form handler, except for type: select
   handleSubmit(event) {
-    // console.log("TableCell::handleSubmit");
     event.preventDefault()
     let value = this.state.newValue,
         column = this.props.column
-    // if (this.props.column.type === 'number') value = parseInt(value)
 
     if (this.props.isHead) {
       column.title = value
@@ -77,37 +56,34 @@ class TableCellContainer extends React.Component {
     } else
       this.props.editRows(this.props.row._id.$oid, this.props.column._id.$oid, this.state.newValue)
 
-    // console.log(`value: ${value}`);
     this.setState({
       editable: false
-    });
+    })
   }
 
   //Escape handler, discard changes
   handleKeyDown(event) {
-    // console.log("TableCell::handleKeyDown");
     if (event.key === 'Escape') {
-      event.preventDefault();
+      event.preventDefault()
       this.setState({
         newValue: this.state.value,
         editable: false
-      });
+      })
     }
   }
 
   //Select change handler
   handleSelect(event) {
-    // console.log("TableCell::handleSelect");
     this.setState({
       newValue: event.target.value
-    });
+    })
   }
 
   render() {
-    let tableCell;
+    let tableCell
     if (this.type === 'select' && !this.props.isHead) {
       tableCell = (
-        <TableCellSelect options={this.state.options}
+        <TableCellSelect options={this.props.column.options}
                       editable={this.state.editable}
                       column={this.props.column}
                       value={this.props.value}
@@ -116,30 +92,30 @@ class TableCellContainer extends React.Component {
                       handleSelect={this.handleSelect}
                       handleClick={this.handleClick}
                       handleSubmit={this.handleSubmit} />
-              );
+      )
     } else {
       tableCell = (
         <TableCellDefault type={this.type}
-                editable={this.state.editable}
-                placeholder={this.props.column.title}
-                column={this.props.column}
-                value={this.props.value}
-                required={this.props.column.isRequired}
-                handleChange={this.handleChange}
-                handleKeyDown={this.handleKeyDown}
-                handleClick={this.handleClick}
-                handleSubmit={this.handleSubmit} />
-              );
+                      editable={this.state.editable}
+                      placeholder={this.props.column.title}
+                      column={this.props.column}
+                      value={this.props.value}
+                      required={this.props.column.isRequired}
+                      handleChange={this.handleChange}
+                      handleKeyDown={this.handleKeyDown}
+                      handleClick={this.handleClick}
+                      handleSubmit={this.handleSubmit} />
+      )
     }
 
     return (
-      <td className={!this.state.editable ? "editable" : ""} onClick={this.handleClick} >
+      <td className={!this.state.editable ? "touch" : ""} onClick={this.handleClick} >
         {tableCell}
       </td>
     )
   }
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({ ...state })
 
 export default connect(mapStateToProps, {editRows, editColumns})(TableCellContainer)
