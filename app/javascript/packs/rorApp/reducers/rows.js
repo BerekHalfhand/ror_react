@@ -17,6 +17,7 @@ function rows(state = [], action) {
         isFetching: false,
         items: data,
       })
+
     case ROWS_ADD_SUCCESS:
       // console.log('addRowsSuccess action -> ', action)
       let {response} = action.payload
@@ -29,16 +30,11 @@ function rows(state = [], action) {
         isFetching: false,
         items: items,
       })
+
     case ROWS_EDIT_SUCCESS:
-      console.log('editRowsSuccess action -> ', action)
+      // console.log('editRowsSuccess action -> ', action)
       let updatedRow = action.payload.response
-      // let {row, column, value} = action.payload
-      // newState = {
-      //   isFetching: false,
-      //   items: [],
-      // }
-      // if (column.type === 'number') value = parseInt(value)
-      //
+
       state.items.forEach((v, i) => {
         if (v._id.$oid === updatedRow._id.$oid) v.values = updatedRow.values
 
@@ -50,19 +46,22 @@ function rows(state = [], action) {
         isFetching: false,
         items: items,
       })
+
     case ROWS_ADD_REQUEST:
     case ROWS_EDIT_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
       })
+
     case ROWS_ADD_FAILURE:
     case ROWS_EDIT_FAILURE:
       let {error} = action.payload
-      console.log('An error occurred.', action)
+      console.error('An error occurred.', action)
 
       return Object.assign({}, state, {
         isFetching: false,
       })
+
     default:
       return state
   }

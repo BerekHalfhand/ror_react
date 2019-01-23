@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :user, only: [:index, :create, :destroy, :update]
       resources :row, only: [:index, :create, :destroy, :update]
+      resources :column, only: [:index, :create, :destroy, :update]
     end
   end
 

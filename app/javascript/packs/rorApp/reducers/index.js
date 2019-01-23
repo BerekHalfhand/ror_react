@@ -3,19 +3,17 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rows from './rows'
 import columns from './columns'
-import {fetchRows} from '../actions'
+import {fetchRows, fetchColumns} from '../actions'
 
 const initialState = {
   rows: {
     isFetching: true,
-    items: []
+    items: [],
   },
-  columns: [
-    {id: 'c1', title: 'Name', type: 'text',   isRequired: true},
-    {id: 'c2', title: 'Level', type: 'number', isRequired: true},
-    {id: 'c3', title: 'Birthsday',   type: 'date',   isRequired: false},
-    {id: 'c4', title: 'Sex', type: 'select', isRequired: true, options: ['Male', 'Female']},
-  ],
+  columns: {
+    isFetching: true,
+    items: [],
+  },
 }
 
 const rootReducer = combineReducers({
@@ -25,7 +23,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  initialState,    //remove initial population here
+  initialState,
   composeWithDevTools(
     applyMiddleware(
       thunkMiddleware, // lets us dispatch() functions
@@ -33,7 +31,7 @@ const store = createStore(
   )
 )
 
-store.dispatch(fetchRows()).then(() => console.log(store.getState()))
-
+store.dispatch(fetchRows()).then((rows) => console.log("Rows are loaded:", rows))
+store.dispatch(fetchColumns()).then((columns) => console.log("Columns are loaded:", columns))
 
 export default store

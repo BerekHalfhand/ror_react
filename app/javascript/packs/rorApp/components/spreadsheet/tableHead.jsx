@@ -10,7 +10,7 @@ import TableCellContainer from './tableCellContainer';
 const TableHead = props => (
   <tr className="font-weight-bold">
     <th>#</th>
-    {props.columns && props.columns.map((column, i) => {
+    {props.columns && props.columns.items && props.columns.items.map((column, i) => {
       return (
         <TableCellContainer key={i} value={column.title} column={column} isHead={true} />
       );
@@ -19,7 +19,7 @@ const TableHead = props => (
 )
 
 TableHead.propTypes = {
-  columns: PropTypes.array,           //all the columns in the table
+  columns: PropTypes.object,           //all the columns in the table
   //...
 }
 

@@ -1,33 +1,67 @@
 import {
   COLUMNS_FETCH,
-  COLUMNS_ADD,
-  COLUMNS_EDIT,
+  COLUMNS_ADD_REQUEST,
+  COLUMNS_ADD_SUCCESS,
+  COLUMNS_ADD_FAILURE,
+  COLUMNS_EDIT_REQUEST,
+  COLUMNS_EDIT_SUCCESS,
+  COLUMNS_EDIT_FAILURE,
 } from '../actions'
 
 function columns(state = [], action) {
+  let items = []
   switch (action.type) {
     case COLUMNS_FETCH:
+      let {data} = action.payload
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: data,
+      })
+    case COLUMNS_ADD_SUCCESS:
+      // console.log('addColumnsSuccess action -> ', action)
+      let {response} = action.payload
+
+      if (state.items) items = state.items.slice(0)
+
+      items = items.concat(response)
+
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: items,
+      })
+
+    case COLUMNS_EDIT_SUCCESS:
+      // console.log('editColumnsSuccess action -> ', action)
+      let updatedColumn = action.payload.response
+
+      state.items.forEach((v, i) => {
+        if (v._id.$oid === updatedColumn._id.$oid) v.values = updatedColumn.values
+
+        items.push(v);
+      })
+
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: items,
+      })
+
+    case COLUMNS_EDIT_REQUEST:
       return state
-    case COLUMNS_ADD:
-      console.log('addColumn action -> ', action)
-      let i = state.length+1,
-          column = action.payload.column,
-          options = action.payload.column.options.split(',')
 
-      column = {
-        id: `c${i}`,
-        title: column.title,
-        isRequired: column.isRequired,
-        type: column.type,
-        options: options,
-      }
+    case COLUMNS_ADD_REQUEST:
+    case COLUMNS_EDIT_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      })
 
-      let newState = state.slice(0)
-      newState.push(column)
+    case COLUMNS_ADD_FAILURE:
+    case COLUMNS_EDIT_FAILURE:
+      let {error} = action.payload
+      console.error('An error occurred.', action)
 
-      return newState
-    case COLUMNS_EDIT:
-      return state
+      return Object.assign({}, state, {
+        isFetching: false,
+      })
     default:
       return state
   }

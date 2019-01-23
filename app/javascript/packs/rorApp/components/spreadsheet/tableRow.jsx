@@ -10,9 +10,10 @@ import TableCellContainer from './tableCellContainer';
 const TableRow = props => (
   <tr>
     <td className="row-number">{props.num}</td>
-    {props.columns.map((column, i) => {
+    {props.columns && props.columns.items && props.columns.items.map((column, i) => {
       let values = props.row.values,
-          value  = values && values[column.id] ? values[column.id] : ""; //0
+          columnId = column && column._id && column._id.$oid,
+          value  = values && values[columnId] ? values[columnId] : ""; //0
       return (
         <TableCellContainer key={i} value={value} row={props.row} column={column} />
       );
@@ -23,7 +24,7 @@ const TableRow = props => (
 TableRow.propTypes = {
   num: PropTypes.number,              //number for the first cell in a row
   row: PropTypes.object.isRequired,   //row data
-  columns: PropTypes.array,           //all the columns in the table
+  columns: PropTypes.object,           //all the columns in the table
   //...
 }
 

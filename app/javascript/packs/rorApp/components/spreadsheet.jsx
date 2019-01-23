@@ -26,7 +26,9 @@ class Spreadsheet extends React.Component {
   }
 
   render() {
-    let rows = this.props.rows || null
+    let rows = this.props.rows || null,
+        columns = this.props.columns || null
+
     return (
       <React.Fragment>
         <h1>Spreadsheet</h1>
@@ -38,7 +40,7 @@ class Spreadsheet extends React.Component {
         <hr />
         <table id="spreadsheet-table" className="table table-bordered table-striped">
           <thead>
-            <TableHead columns={this.props.columns} />
+            <TableHead columns={columns.items} />
           </thead>
           <tbody>
             {rows && rows.items.map((row, i) => { // !rows.isFetching &&

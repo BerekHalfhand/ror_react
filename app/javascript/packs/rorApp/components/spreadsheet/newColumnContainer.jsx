@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
-import { addColumn } from '../../actions'
+import { addColumns } from '../../actions'
 
 // import {Api} from '../middleware/api'
 
@@ -15,7 +15,7 @@ class NewColumnContainer extends React.Component {
     super(props)
     this.state = {
       title: "",
-      type: "",
+      type: "text",
       options: "",
       isRequired: false,
     }
@@ -25,14 +25,17 @@ class NewColumnContainer extends React.Component {
   handleSubmit (event) {
       event.preventDefault();
 
+      let options = []
+      if (this.state.options) options = this.state.options.split(',')
+
       let column = {
         title: this.state.title,
         isRequired: this.state.isRequired,
         type: this.state.type,
-        options: this.state.options,
+        options: options,
       }
 
-      this.props.addColumn(column)
+      this.props.addColumns(column)
       this.props.hideForm()
     }
 
@@ -56,4 +59,4 @@ NewColumnContainer.propTypes = {
 
 const mapStateToProps = state => ({ ...state });
 
-export default connect(mapStateToProps, { addColumn })(NewColumnContainer)
+export default connect(mapStateToProps, { addColumns })(NewColumnContainer)

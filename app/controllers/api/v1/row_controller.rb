@@ -19,10 +19,10 @@ class Api::V1::RowController < Api::V1::BaseController
     respond_with :api, :v1, json: new_rows
   end
 
-  def destroy
-    row = Row.find(params["id"])
-    respond_with row.destroy()
-  end
+  # def destroy
+  #   row = Row.find(params["id"])
+  #   respond_with row.destroy()
+  # end
 
   def update
     row = Row.find(params["id"])
@@ -32,7 +32,7 @@ class Api::V1::RowController < Api::V1::BaseController
     value = row_params[:value]
 
     values[column] = value
-    # puts "values: #{values}"
+
     updatedRow = {:values => values}
     row.update_attributes(updatedRow)
     respond_with row, json: row
