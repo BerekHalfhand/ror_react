@@ -17,10 +17,6 @@ const TableHead = props => (
   </tr>
 )
 
-TableHead.propTypes = {
-  columns: PropTypes.object,           //all the columns in the table
-}
-
 const mapStateToProps = state => ({ ...state })
 
 export default connect(mapStateToProps)(TableHead)

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Button } from 'reactstrap'
 
 const TableCellDefault = props => (
   <React.Fragment>
@@ -13,7 +14,7 @@ const TableCellDefault = props => (
               placeholder={props.column.title}
               required={props.column.isRequired}
               defaultValue={props.value} />
-        <button type="submit" className="btn btn-primary touch m-1">Ok</button>
+        <Button color="primary" type="submit" className="touch m-1">Ok</Button>
       </form> :
       props.value }
   </React.Fragment>

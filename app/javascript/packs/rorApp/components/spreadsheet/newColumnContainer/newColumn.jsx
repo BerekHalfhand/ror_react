@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Button } from 'reactstrap'
 
 const NewColumn = props => (
   <React.Fragment>
@@ -47,7 +48,7 @@ const NewColumn = props => (
               onChange={props.handleChange}
               required />
       </label> : null }
-      <button type="submit" className="btn btn-primary m-1">Ok</button>
+      <Button color="primary" type="submit" className="m-1">Ok</Button>
     </form>
   </React.Fragment>
 )

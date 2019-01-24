@@ -11,7 +11,7 @@ import Header from './components/header';
 import Sidebar from './components/sidebar';
 import LandingPage from './components/landingPage';
 import UserList from './components/userList';
-import Spreadsheet from './components/spreadsheet';
+import SpreadsheetContainer from './components/spreadsheetContainer';
 
 const App = props => (
   <div className="row layout">
@@ -20,7 +20,7 @@ const App = props => (
     <article id="app-body" className="main col-10 py-3">
       <Route exact path='/' component={LandingPage} {...props} />
       <Route exact path='/userList' component={UserList} {...props} />
-      <Route exact path='/spreadsheet' component={Spreadsheet} {...props} />
+      <Route exact path='/spreadsheet' component={SpreadsheetContainer} {...props} />
     </article>
   </div>
 )

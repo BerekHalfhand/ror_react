@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import TableCellContainer from './tableCellContainer';
 
 const TableRow = props => (
-  <tr>
+  <tr className={props.className}>
     <td className="row-number">{props.num}</td>
     {props.columns && props.columns.items && props.columns.items.map((column, i) => {
       let values = props.row.values,
@@ -23,7 +23,6 @@ const TableRow = props => (
 TableRow.propTypes = {
   num: PropTypes.number,              //number for the first cell in a row
   row: PropTypes.object.isRequired,   //row data
-  columns: PropTypes.object,          //all the columns in the table
 }
 
 const mapStateToProps = state => ({ ...state })

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Button } from 'reactstrap'
 
 const TableCellSelect = props => (
   <React.Fragment>
@@ -17,7 +18,7 @@ const TableCellSelect = props => (
             );
           }, this)}
       </select>
-      <button type="submit" className="btn btn-primary touch m-1">Ok</button>
+      <Button color="primary" type="submit" className="touch m-1">Ok</Button>
     </form> :
     props.value }
   </React.Fragment>
