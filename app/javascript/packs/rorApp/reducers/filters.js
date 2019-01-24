@@ -22,7 +22,6 @@ function filters(state = [], action) {
       if (state.items) items = state.items.slice(0)
 
       items.push(filter)
-      console.log('items', items)
 
       return Object.assign({}, state, {
         isActive: true,

@@ -28,46 +28,64 @@ class SpreadsheetContainer extends React.Component {
     this.props.filters.items.map((filter, i) => {
       if (!row.values || $.isEmptyObject(row.values) || !row.values[filter.column])
         match = false
+      else {
+        let value = row.values[filter.column]
 
-      let value = row.values[filter.column]
+        switch (filter.type) {
+          case 'text':
+            if (value.toLowerCase() != filter.values[0].toLowerCase())
+              match = false
 
-      switch (filter.type) {
+            break;
 
-        case 'number':
-          if (filter.values[0] && value < filter.values[0] ||
-              filter.values[1] && value > filter.values[1])
+          case 'number':
+            if (filter.values[0] && value < filter.values[0] ||
+                filter.values[1] && value > filter.values[1])
+              match = false
+
+            break;
+
+          case 'date':
+            value = new Date(value)
+
+            if (filter.values[0] && value < new Date(filter.values[0]) ||
+                filter.values[1] && value > new Date(filter.values[1]))
+              match = false
+
+            break;
+
+          default:
+          if (value != filter.values[0])
             match = false
-
-          break;
-
-        case 'date':
-          value = new Date(value)
-          if (filter.values[0] && value < new Date(filter.values[0]) ||
-              filter.values[1] && value > new Date(filter.values[1]))
-            match = false
-
-          break;
-
-        default:
-        if (value != filter.values[0])
-          match = false
+        }
       }
 
     })
+
     return match
   }
 
   getFilteredIds () {
-    let res = [], rows = $.extend({}, this.props.rows)
+    let res = [], rows = {}, filteredItems = []
+
+    rows = $.extend(true, rows, this.props.rows)
 
     if (this.props.filters.items &&
         this.props.filters.items.length &&
         this.props.filters.isActive) {
-      rows.items = rows.items.filter(this.runFilters)
+
+      filteredItems = rows.items.filter(this.runFilters)
+
+      filteredItems.map((item, i) => {
+        res.push(item._id.$oid)
+      })
+
+    } else {
       rows.items.map((item, i) => {
         res.push(item._id.$oid)
       })
     }
+
     return res
   }
 

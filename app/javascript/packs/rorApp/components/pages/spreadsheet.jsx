@@ -42,9 +42,8 @@ const Spreadsheet = (props) => (
               return row._id ? (<TableRow key={row._id.$oid}
                                           num={++i}
                                           row={row}
-                                          className={props.filteredRows.length &&
-                                                    !props.filteredRows.includes(row._id.$oid) ?
-                                                      "d-none" : ""                                                      }
+                                          className={!props.filteredRows.includes(row._id.$oid) ?
+                                                      "d-none" : "" }
                                 />)
                               : null
             }, this)}
