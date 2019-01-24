@@ -52,13 +52,15 @@ $header-height: 80px;
   }
 }
 
-.grow {
-    flex: 1;
-}
+
 
 .main {
     overflow-y: auto;
     height: calc(100% - #{$header-height});
+}
+
+.grow {
+    flex: 1;
 }
 
 .layout {

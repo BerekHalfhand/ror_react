@@ -33,16 +33,7 @@ class TableCellContainer extends React.Component {
     if (!this.state.editable)
       this.setState({
         editable: true,
-        showFilter: false,
       })
-  }
-
-  handleFilterClick(event) {
-    event.stopPropagation()
-    console.log('handleFilterClick')
-    this.setState({
-      showFilter: !this.state.showFilter,
-    })
   }
 
   //Input change handler
@@ -87,7 +78,6 @@ class TableCellContainer extends React.Component {
                     placeholder={this.props.column.title}
                     column={this.props.column}
                     value={this.props.value}
-                    required={this.props.column.isRequired}
                     handleChange={this.handleChange}
                     handleKeyDown={this.handleKeyDown}
                     handleClick={this.handleClick}
@@ -95,7 +85,7 @@ class TableCellContainer extends React.Component {
       )
 
     return (
-      <td className={(!this.state.editable ? "touch position" : "") + "position-relative"} onClick={this.handleClick} >
+      <td className="touch" onClick={this.handleClick} >
         {tableCell}
         {this.props.isHead ? <FilterFormContainer column={this.props.column} />
         : null }

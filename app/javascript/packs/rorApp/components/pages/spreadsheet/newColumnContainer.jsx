@@ -18,7 +18,13 @@ class NewColumnContainer extends React.Component {
       options: "",
       isRequired: false,
     }
+    this.baseState = this.state
+
     autoBind(this)
+  }
+
+  resetForm() {
+    this.setState(this.baseState)
   }
 
   handleSubmit (event) {
@@ -30,6 +36,7 @@ class NewColumnContainer extends React.Component {
       options = options.map(function(item) {
         return item.trim();
       });
+      console.log('this.state', this.state)
 
       let column = {
         title: this.state.title,
@@ -38,6 +45,8 @@ class NewColumnContainer extends React.Component {
         options: options,
       }
 
+      console.log('column', column)
+      this.resetForm()
       this.props.addColumns(column)
     }
 

@@ -26,7 +26,7 @@ export default class UserListContainer extends React.Component {
 
     Api.createUser(newUser)
     .done(response => {
-        console.log('then')
+        // console.log('then')
         console.dir(response)
         let newUsers = this.state.users
         newUsers.push(response)

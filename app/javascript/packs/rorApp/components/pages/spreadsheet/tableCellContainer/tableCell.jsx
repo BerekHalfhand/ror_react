@@ -12,7 +12,7 @@ const Options = props => (
   </React.Fragment>
 )
 
-const TableCellDefault = props => (
+const TableCell = props => (
   <React.Fragment>
     { props.editable ?
       <Form onSubmit={props.handleSubmit}>
@@ -36,9 +36,8 @@ const TableCellDefault = props => (
   </React.Fragment>
 )
 
-TableCellDefault.propTypes = {
+TableCell.propTypes = {
   type:           PropTypes.string.isRequired,
-  required:       PropTypes.bool.isRequired,
   column:         PropTypes.object.isRequired,
   value:          PropTypes.string,
   editable:       PropTypes.bool,
@@ -51,4 +50,4 @@ TableCellDefault.propTypes = {
 
 const mapStateToProps = state => ({ ...state })
 
-export default connect(mapStateToProps)(TableCellDefault)
+export default connect(mapStateToProps)(TableCell)
