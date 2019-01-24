@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
-import { Button, Input } from 'reactstrap'
+import { Button } from 'reactstrap'
 import { addColumn, addRows, addFilter, removeFilter, toggleFilters } from '../actions'
 
 // Components
@@ -17,13 +17,16 @@ const Spreadsheet = (props) => (
     <Button color="primary" className="touch m-2"
             onClick={() => props.handleToggle()}
             disabled={props.columns.isFetching}>Add column</Button>
-    <label className="touch">Filter
-      <Input  type="checkbox" className="m-1"
-              checked={props.filters.isActive}
-              onChange={() => props.toggleFilters()}/>
-    </label>
-    <Button color="secondary" className="touch m-2"
-            onClick={() => props.removeFilter(null)}>Reset filters</Button>
+    <span className="float-right">
+      <label className="touch">
+        <input  type="checkbox" className="m-1 align-bottom"
+                checked={props.filters.isActive}
+                onChange={() => props.toggleFilters()}/>
+                Filter rows
+      </label>
+      <Button outline color="secondary" className="touch m-2"
+              onClick={() => props.removeFilter(null)}>Reset filters</Button>
+    </span>
     {props.showForm ?
       <NewColumnContainer hideForm={props.handleToggle}/>
     : null}

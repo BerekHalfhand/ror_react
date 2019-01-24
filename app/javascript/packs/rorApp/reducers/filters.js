@@ -30,7 +30,7 @@ function filters(state = [], action) {
       })
 
     case FILTERS_TOGGLE:
-      console.log('fetchToggle action -> ', action)
+      console.log('filtersToggle action -> ', action)
       let {value} = action.payload
 
       return Object.assign({}, state, {

@@ -1,8 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from 'react-router-dom';
-// import {Api} from '../../middleware/api'
-
 // Components
 import UserItem from './userTable/userItem';
 

@@ -10,7 +10,7 @@ import { addColumn } from './actions/index'
 import Header from './components/header';
 import Sidebar from './components/sidebar';
 import LandingPage from './components/landingPage';
-import UserList from './components/userList';
+import UserListContainer from './components/userListContainer';
 import SpreadsheetContainer from './components/spreadsheetContainer';
 
 const App = props => (
@@ -19,7 +19,7 @@ const App = props => (
     <Sidebar/>
     <article id="app-body" className="main col-10 py-3">
       <Route exact path='/' component={LandingPage} {...props} />
-      <Route exact path='/userList' component={UserList} {...props} />
+      <Route exact path='/userList' component={UserListContainer} {...props} />
       <Route exact path='/spreadsheet' component={SpreadsheetContainer} {...props} />
     </article>
   </div>
