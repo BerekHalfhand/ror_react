@@ -8,6 +8,7 @@ import { editRows, editColumns } from '../../actions'
 // Components
 import TableCellDefault from './tableCellContainer/tableCellDefault'
 import TableCellSelect from './tableCellContainer/tableCellSelect'
+import FilterFormContainer from './tableCellContainer/filterFormContainer'
 
 class TableCellContainer extends React.Component {
   static propTypes = {
@@ -45,12 +46,10 @@ class TableCellContainer extends React.Component {
     })
   }
 
-  //Input change handler, except for type: select
+  //Input change handler
   handleChange(event) {
-    let value = event.target.value
-    this.setState({
-      newValue: value
-    })
+    let field = {[event.target.name]: event.target.value}
+    this.setState({ ...field })
   }
 
   //Submit form handler, except for type: select
@@ -81,13 +80,6 @@ class TableCellContainer extends React.Component {
     }
   }
 
-  //Select change handler
-  handleSelect(event) {
-    this.setState({
-      newValue: event.target.value
-    })
-  }
-
   render() {
     let tableCell
     if (this.type === 'select' && !this.props.isHead) {
@@ -98,7 +90,7 @@ class TableCellContainer extends React.Component {
                       value={this.props.value}
                       newValue={this.state.newValue}
                       required={this.props.column.isRequired}
-                      handleSelect={this.handleSelect}
+                      handleChange={this.handleChange}
                       handleClick={this.handleClick}
                       handleSubmit={this.handleSubmit} />
       )
@@ -116,13 +108,12 @@ class TableCellContainer extends React.Component {
                       handleSubmit={this.handleSubmit} />
       )
     }
-    let filter = <button type="button" className="btn btn-secondary touch m-2 position-absolute"
-                    onClick={(event) => {this.handleFilterClick(event)}}>{this.state.showFilter ? 'X' : '?'}</button>
 
     return (
       <td className={(!this.state.editable ? "touch position" : "") + "position-relative"} onClick={this.handleClick} >
         {tableCell}
-        {this.props.isHead ? filter : null}
+        {this.props.isHead ? <FilterFormContainer column={this.props.column} />
+        : null }
       </td>
     )
   }

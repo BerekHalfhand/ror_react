@@ -17,12 +17,7 @@ const initialState = {
   },
   filters: {
     isActive: true,
-    items: [
-    {id: '1', column: '5c47dfb79375b058bf09214f', type: 'select', values: ['Male']},
-    {id: '1', column: '5c4893e99375b058bf092150', type: 'text', values: ['Yuri']},
-    {id: '1', column: '5c4894499375b058bf092151', type: 'number', values: [15, 50]},
-    {id: '1', column: '5c4895649375b058bf092152', type: 'date', values: ['2016-01-01', '2020-01-01']}],
-    // {},
+    items: [],
   }
 }
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
-import { addColumn, addRows, addFilter, removeFilter, toggleFilters } from '../actions/index'
+import { addColumn, addRows, addFilter, removeFilter, toggleFilters } from '../actions'
 
 // Components
 import TableHead from './spreadsheet/tableHead'
@@ -28,10 +28,10 @@ class Spreadsheet extends React.Component {
   runFilters (row) {
         // console.log('runFilters')
     let match = true
+    // console.log('row', row)
 
     this.props.filters.items.map((filter, i) => {
-      // console.log('row', row)
-      // console.log('filter', filter)
+      // console.log('filter', filter, i)
       if (!row.values || $.isEmptyObject(row.values) || !row.values[filter.column])
         match = false
 
@@ -81,10 +81,7 @@ class Spreadsheet extends React.Component {
           <input type="checkbox" checked={this.props.filters.isActive} onChange={() => this.props.toggleFilters()} className="m-1"/>
         </label>
         <button type="button" className="btn btn-secondary touch m-2"
-            onClick={() => this.props.addFilter({id: '2', column: '5c47dfb79375b058bf09214f', type: 'select', values: ['Male']})}>Add filter</button>
-
-        <button type="button" className="btn btn-secondary touch m-2"
-            onClick={() => this.props.removeFilter('5c47dfb79375b058bf09214f')}>Remove filter</button>
+            onClick={() => this.props.removeFilter(null)}>Reset filters</button>
         {this.state.showForm ?
           <NewColumnContainer hideForm={this.toggleShowForm}/>
         : null}

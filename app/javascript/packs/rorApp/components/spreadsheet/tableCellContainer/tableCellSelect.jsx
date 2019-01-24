@@ -6,7 +6,8 @@ const TableCellSelect = props => (
   <React.Fragment>
   { props.editable ?
     <form onSubmit={props.handleSubmit}>
-      <select onChange={props.handleSelect}
+      <select name="newValue"
+        onChange={props.handleChange}
         value={props.newValue}
         required={props.column.isRequired} >
           <option value=""></option>
@@ -29,7 +30,7 @@ TableCellSelect.propTypes = {
   value:        PropTypes.string,
   newValue:     PropTypes.string,
   editable:     PropTypes.bool,
-  handleSelect: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
   handleClick:  PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }

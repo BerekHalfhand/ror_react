@@ -64,19 +64,22 @@ export function removeFilter(columnId) {
     let filters = readStorage('filters'),
         index = -1
 
-    if (filters && filters.items) {
-      filters.items.map((item, i) => {
-        if (item.column == columnId) index = i
-      })
+    if (!columnId) {
+      sessionStorage.removeItem('filters')
+      dispatch(removeFilters(defaultFilters))
+    } else {
+      if (filters && filters.items) {
+        filters.items.map((item, i) => {
+          if (item.column == columnId) index = i
+        })
 
-      if (index > -1) {
-        filters.items.splice(index, 1)
-        sessionStorage.setItem('filters', JSON.stringify(filters))
-        console.log('filters', filters)
-        dispatch(removeFilters(filters))
+        if (index > -1) {
+          filters.items.splice(index, 1)
+          sessionStorage.setItem('filters', JSON.stringify(filters))
+          // console.log('filters', filters)
+          dispatch(removeFilters(filters))
+        }
       }
     }
-
-
   }
 }

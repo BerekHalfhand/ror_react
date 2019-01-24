@@ -6,7 +6,8 @@ const TableCellDefault = props => (
   <React.Fragment>
     { props.editable ?
       <form onSubmit={props.handleSubmit}>
-        <input type={props.type}
+        <input name="newValue"
+              type={props.type}
               onChange={props.handleChange}
               onKeyDown={props.handleKeyDown}
               placeholder={props.column.title}
