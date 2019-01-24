@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';
-import {Api} from '../../../middleware/api'
+import {Api} from 'packs/rorApp/middleware/api'
 
 export default class UserItem extends React.Component {
   static propTypes = {

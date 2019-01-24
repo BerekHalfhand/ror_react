@@ -16,7 +16,7 @@ function filters(state = [], action) {
       return filters
 
     case FILTERS_ADD:
-      console.log('addFilters action -> ', action)
+      // console.log('addFilters action -> ', action)
       let {filter} = action.payload
 
       if (state.items) items = state.items.slice(0)
@@ -30,7 +30,7 @@ function filters(state = [], action) {
       })
 
     case FILTERS_TOGGLE:
-      console.log('filtersToggle action -> ', action)
+      // console.log('filtersToggle action -> ', action)
       let {value} = action.payload
 
       return Object.assign({}, state, {

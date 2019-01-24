@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {Api} from '../middleware/api'
+import {Api} from 'packs/rorApp/middleware/api'
 import autoBind from 'react-autobind'
 
 // Components

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
-import { addColumns } from '../../actions'
+import { addColumns } from 'packs/rorApp/actions'
 
 // Components
 import NewColumn from './newColumnContainer/newColumn'

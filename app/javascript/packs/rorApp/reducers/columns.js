@@ -10,7 +10,7 @@ import {
 
 function columns(state = [], action) {
   let items = []
-  
+
   switch (action.type) {
     case COLUMNS_FETCH:
       let {data} = action.payload

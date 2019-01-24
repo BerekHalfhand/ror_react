@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
 import { Button } from 'reactstrap'
-import { addFilter, removeFilter, toggleFilters } from '../../../actions'
+import { addFilter, removeFilter, toggleFilters } from 'packs/rorApp/actions'
 
 // Components
-import ModalForm from '../../modalForm'
+import ModalForm from 'packs/rorApp/components/modalForm'
 import FilterFormDefault from './filterFormContainer/filterFormDefault'
 import FilterFormSelect from './filterFormContainer/filterFormSelect'
 
@@ -49,7 +49,7 @@ class FilterFormContainer extends React.Component {
       values: [this.state.value1, this.state.value2]
     }
     if (filter.type == 'number') filter.values = [parseInt(filter.values[0]), parseInt(filter.values[1])]
-    console.log(filter)
+
     this.props.addFilter(filter)
     this.resetForm()
     this.setState({filter: filter})

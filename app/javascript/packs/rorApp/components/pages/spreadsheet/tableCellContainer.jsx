@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
-import { editRows, editColumns } from '../../actions'
+import { editRows, editColumns } from 'packs/rorApp/actions'
 
 // Components
 import TableCellDefault from './tableCellContainer/tableCellDefault'

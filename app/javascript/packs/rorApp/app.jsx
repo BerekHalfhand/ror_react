@@ -9,9 +9,9 @@ import { addColumn } from './actions/index'
 
 import Header from './components/header';
 import Sidebar from './components/sidebar';
-import LandingPage from './components/landingPage';
-import UserListContainer from './components/userListContainer';
-import SpreadsheetContainer from './components/spreadsheetContainer';
+import LandingPage from './components/pages/landingPage';
+import UserListContainer from './components/pages/userListContainer';
+import SpreadsheetContainer from './components/pages/spreadsheetContainer';
 
 const App = props => (
   <div className="row layout">

@@ -23,7 +23,6 @@ class ModalForm extends React.Component {
   }
 
   toggle() {
-    console.log('toggle')
     this.setState({
       modal: !this.state.modal
     });

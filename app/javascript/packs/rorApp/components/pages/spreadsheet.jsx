@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
 import { Button } from 'reactstrap'
-import { addColumn, addRows, addFilter, removeFilter, toggleFilters } from '../actions'
+import { addColumn, addRows, addFilter, removeFilter, toggleFilters } from 'packs/rorApp/actions'
 
 // Components
 import TableHead from './spreadsheet/tableHead'
