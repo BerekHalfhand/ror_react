@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import autoBind from 'react-autobind'
 import { Button } from 'reactstrap'
 import { addColumn, addRows, addFilter, removeFilter, toggleFilters } from 'packs/rorApp/actions'
 
@@ -14,9 +13,7 @@ import NewColumnContainer from './spreadsheet/newColumnContainer'
 const Spreadsheet = (props) => (
   <article>
     <h1>Spreadsheet</h1>
-    <Button color="primary" className="touch m-2"
-            onClick={() => props.handleToggle()}
-            disabled={props.columns.isFetching}>Add column</Button>
+
     <span className="float-right">
       <label className="touch">
         <input  type="checkbox" className="m-1 align-bottom"
@@ -27,9 +24,9 @@ const Spreadsheet = (props) => (
       <Button outline color="secondary" className="touch m-2"
               onClick={() => props.removeFilter(null)}>Reset filters</Button>
     </span>
-    {props.showForm ?
-      <NewColumnContainer hideForm={props.handleToggle}/>
-    : null}
+
+    <NewColumnContainer />
+
     { props.columns.items.length ?
       <React.Fragment>
         <hr />
@@ -42,10 +39,9 @@ const Spreadsheet = (props) => (
               return row._id ? (<TableRow key={row._id.$oid}
                                           num={++i}
                                           row={row}
-                                          className={!props.filteredRows.includes(row._id.$oid) ?
-                                                      "d-none" : "" }
+                                          className={!props.filteredRows.includes(row._id.$oid) ? "d-none" : "" }
                                 />)
-                              : null
+                             : null
             }, this)}
           </tbody>
         </table>
@@ -58,6 +54,10 @@ const Spreadsheet = (props) => (
     <Link to="/">Home</Link>
   </article>
 )
+
+Spreadsheet.propTypes = {
+  filteredRows: PropTypes.array.isRequired,   //which rows to show, what's not included will be hidden
+}
 
 const mapStateToProps = state => ({ ...state })
 

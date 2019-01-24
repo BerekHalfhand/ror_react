@@ -14,7 +14,7 @@ import UserListContainer from './components/pages/userListContainer';
 import SpreadsheetContainer from './components/pages/spreadsheetContainer';
 
 const App = props => (
-  <div className="row layout">
+  <section className="row layout">
     <Header />
     <Sidebar/>
     <article id="app-body" className="main col-10 py-3">
@@ -22,7 +22,7 @@ const App = props => (
       <Route exact path='/userList' component={UserListContainer} {...props} />
       <Route exact path='/spreadsheet' component={SpreadsheetContainer} {...props} />
     </article>
-  </div>
+  </section>
 )
 
 const mapStateToProps = state => ({ ...state });

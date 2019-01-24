@@ -1,6 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
 
@@ -12,16 +10,11 @@ class SpreadsheetContainer extends React.Component {
     super(props)
     this.state = {
       showForm: false,
-      applyFilters: true,
     }
     autoBind(this)
   }
 
-  //v = optional explicit value
-  toggleShowForm (v) {
-    this.setState({showForm: v || !this.state.showForm})
-  }
-
+  //filter function, returns false if the row doesn't pass the checks, true otherwise
   runFilters (row) {
     let match = true
 
@@ -65,6 +58,8 @@ class SpreadsheetContainer extends React.Component {
     return match
   }
 
+  //returns an array with the rows that passed all checks.
+  //if [], none will appear
   getFilteredIds () {
     let res = [], rows = {}, filteredItems = []
 
@@ -92,9 +87,7 @@ class SpreadsheetContainer extends React.Component {
   render() {
     let filteredRows = this.getFilteredIds()
 
-    return (<Spreadsheet  filteredRows={filteredRows}
-                          handleToggle={this.toggleShowForm}
-                          showForm={this.state.showForm} />)
+    return (<Spreadsheet filteredRows={filteredRows} />)
   }
 }
 

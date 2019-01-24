@@ -6,6 +6,7 @@ import autoBind from 'react-autobind'
 import { addColumns } from 'packs/rorApp/actions'
 
 // Components
+import ModalForm from 'packs/rorApp/components/modalForm'
 import NewColumn from './newColumnContainer/newColumn'
 
 class NewColumnContainer extends React.Component {
@@ -38,7 +39,6 @@ class NewColumnContainer extends React.Component {
       }
 
       this.props.addColumns(column)
-      this.props.hideForm()
     }
 
     handleChange (event) {
@@ -50,12 +50,16 @@ class NewColumnContainer extends React.Component {
     }
 
   render() {
-    return <NewColumn handleSubmit={this.handleSubmit} handleChange={this.handleChange} showOptions={this.state.showOptions}/>
-  }
-}
+    let modalBody = (<NewColumn showOptions={this.state.showOptions}
+                                handleSubmit={this.handleSubmit}
+                                handleChange={this.handleChange} />)
 
-NewColumnContainer.propTypes = {
-  hideForm: PropTypes.func,
+    return (<ModalForm handleSubmit={this.handleSubmit}
+                       body={modalBody}
+                       buttonLabel="Add column"
+                       buttonColor="primary"
+                       title="Add new column" />)
+  }
 }
 
 const mapStateToProps = state => ({ ...state })

@@ -8,8 +8,7 @@ import { addFilter, removeFilter, toggleFilters } from 'packs/rorApp/actions'
 
 // Components
 import ModalForm from 'packs/rorApp/components/modalForm'
-import FilterFormDefault from './filterFormContainer/filterFormDefault'
-import FilterFormSelect from './filterFormContainer/filterFormSelect'
+import FilterForm from './filterFormContainer/filterForm'
 
 class FilterFormContainer extends React.Component {
   constructor(props) {
@@ -62,12 +61,7 @@ class FilterFormContainer extends React.Component {
   }
 
   render() {
-    let form = null
-
-    if (this.props.column.type == 'select')
-      form = (<FilterFormSelect handleChange={this.handleChange} options={this.props.column.options} {...this.props} />)
-    else
-      form = (<FilterFormDefault handleChange={this.handleChange} {...this.props} />)
+    let form = (<FilterForm handleChange={this.handleChange} options={this.props.column.options} {...this.props} />)
 
     return (
       <React.Fragment>
@@ -77,6 +71,7 @@ class FilterFormContainer extends React.Component {
           <ModalForm handleSubmit={this.handleSubmit}
                    body={form}
                    buttonLabel="?"
+                   buttonColor="secondary"
                    title={"Filter for '"+this.props.column.title+"'"} />
         }
 

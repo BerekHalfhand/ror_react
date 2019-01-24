@@ -6,8 +6,7 @@ import autoBind from 'react-autobind'
 import { editRows, editColumns } from 'packs/rorApp/actions'
 
 // Components
-import TableCellDefault from './tableCellContainer/tableCellDefault'
-import TableCellSelect from './tableCellContainer/tableCellSelect'
+import TableCell from './tableCellContainer/tableCell'
 import FilterFormContainer from './tableCellContainer/filterFormContainer'
 
 class TableCellContainer extends React.Component {
@@ -52,7 +51,7 @@ class TableCellContainer extends React.Component {
     this.setState({ ...field })
   }
 
-  //Submit form handler, except for type: select
+  //Submit form handler
   handleSubmit(event) {
     event.preventDefault()
     let value = this.state.newValue,
@@ -81,33 +80,19 @@ class TableCellContainer extends React.Component {
   }
 
   render() {
-    let tableCell
-    if (this.type === 'select' && !this.props.isHead) {
-      tableCell = (
-        <TableCellSelect options={this.props.column.options}
-                      editable={this.state.editable}
-                      column={this.props.column}
-                      value={this.props.value}
-                      newValue={this.state.newValue}
-                      required={this.props.column.isRequired}
-                      handleChange={this.handleChange}
-                      handleClick={this.handleClick}
-                      handleSubmit={this.handleSubmit} />
+    let tableCell = (
+        <TableCell  type={this.type}
+                    options={this.props.column.options}
+                    editable={this.state.editable}
+                    placeholder={this.props.column.title}
+                    column={this.props.column}
+                    value={this.props.value}
+                    required={this.props.column.isRequired}
+                    handleChange={this.handleChange}
+                    handleKeyDown={this.handleKeyDown}
+                    handleClick={this.handleClick}
+                    handleSubmit={this.handleSubmit} />
       )
-    } else {
-      tableCell = (
-        <TableCellDefault type={this.type}
-                      editable={this.state.editable}
-                      placeholder={this.props.column.title}
-                      column={this.props.column}
-                      value={this.props.value}
-                      required={this.props.column.isRequired}
-                      handleChange={this.handleChange}
-                      handleKeyDown={this.handleKeyDown}
-                      handleClick={this.handleClick}
-                      handleSubmit={this.handleSubmit} />
-      )
-    }
 
     return (
       <td className={(!this.state.editable ? "touch position" : "") + "position-relative"} onClick={this.handleClick} >
