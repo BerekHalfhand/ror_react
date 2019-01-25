@@ -1,6 +1,6 @@
-## Overview
+# Overview
 A basic single-page app providing the following features:
-* Dynamic spreadsheet with filters              (/spreadsheet)
+* **Dynamic spreadsheet with filters              (/spreadsheet)**
 * Minimal CRUD interface for a table of users   (/userList)   <- Experimental, currently deprecated
 
 ![screenshot](https://screenshotscdn.firefoxusercontent.com/images/a400338d-dd53-426d-8961-2d32ec14dad6.png)
@@ -13,12 +13,18 @@ A basic single-page app providing the following features:
 * React
   * React Router
 * Redux
+* Bootstrap 4
 * Unit testing
   * Jest
   * Enzyme
   * Chai
-* Bootstrap 4
-* jquery, sass
+* babel, jquery, sass
+
+# Getting started
+
+## Prerequisites
+
+Ruby on Rails and MongoDB must be installed and configured. The package manager of choice is `yarn`.
 
 ## Installation
 
@@ -36,14 +42,20 @@ Server start (make sure mongod is running and accepting connections):
 
 ## Usage
 
-Deploy the project, launch the server, open the application in a browser and click "Spreadsheet" button either in the header or in the sidebar.
+Deploy the project and launch the server using the instructions above. Open the application in a browser and click the "Spreadsheet" button either in the header or in the sidebar.
+
 The Spreadsheet page will appear with a single button "Add column".
 Click it, choose the title for the new column, its type, and whether it will be a required column.
 Then click "Save".
+
 A table will appear with the newly created column title and a "?" button beside it.
 "?" button allows you to apply a filter to the column, but there should be some rows to filter first.
 Below the table will be a button labeled "Add 10 rows", which does just that, 10 new empty rows will be appended to the table body.
 
+After the table is populated with rows, you can add more columns of different types, or edit the rows, assigning them values according to the column's type.
+Now each column can be assigned a filter and the table will only show those items that pass through all filters.
+Filters may be temporarily switched off by the checkbox above the table, or completely reset by clicking the "Reset filters" button nearby.
+Both of these elements appear only after the table is populated with rows.
 
 **Areas of interest:**
 
