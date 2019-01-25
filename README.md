@@ -2,7 +2,7 @@ A basic single-page app providing the following features:
 * Dynamic spreadsheet with filters              (/spreadsheet)
 * Minimal CRUD interface for a table of users   (/userList)
 
-Current stack:
+**Current stack:**
 * Ruby on Rails
 * Webpack
 * MongoDB
@@ -14,7 +14,7 @@ Current stack:
 * Bootstrap 4
 * jquery, sass
 
-Installation:
+**Installation:**
 
 (Outside the project's dir):
 
@@ -28,8 +28,10 @@ Server start (make sure mongod is running and accepting connections):
 
 `foreman start -f Procfile.dev -p 3000`
 
-Areas of interest:
+**Areas of interest:**
+
 Front-end:    `app/javascript/packs/rorApp`
+
 Back-end:     `app/controllers`, `app/models`
 
 
