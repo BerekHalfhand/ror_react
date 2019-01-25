@@ -30,12 +30,11 @@ export const toggleFilters = (value) => ({
   }
 })
 
-const defaultFilters = { isActive: true, items: []}
 
 function readStorage(key) {
   let res = sessionStorage.getItem(key)
   if (res)  res = JSON.parse(res)
-  else      res = defaultFilters
+  else      res = { isActive: true, items: [] }
   return res
 }
 
@@ -66,7 +65,7 @@ export function removeFilter(columnId) {
 
     if (!columnId) {
       sessionStorage.removeItem('filters')
-      dispatch(removeFilters(defaultFilters))
+      dispatch(removeFilters({ isActive: true, items: [] }))
     } else {
       if (filters && filters.items) {
         filters.items.map((item, i) => {
@@ -76,7 +75,7 @@ export function removeFilter(columnId) {
         if (index > -1) {
           filters.items.splice(index, 1)
           sessionStorage.setItem('filters', JSON.stringify(filters))
-          
+
           dispatch(removeFilters(filters))
         }
       }

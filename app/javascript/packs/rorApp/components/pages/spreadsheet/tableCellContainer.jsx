@@ -23,6 +23,7 @@ class TableCellContainer extends React.Component {
       newValue:   this.props.value || this.props.column.value,
     }
 
+    //column titles are always text
     this.type = this.props.isHead ? 'text' : this.props.column.type
     autoBind(this)
   }
@@ -47,6 +48,7 @@ class TableCellContainer extends React.Component {
     let value = this.state.newValue,
         column = this.props.column
 
+    //sending an edit request to one collection or the other
     if (this.props.isHead) {
       column.title = value
       this.props.editColumns(column)
@@ -58,7 +60,7 @@ class TableCellContainer extends React.Component {
     })
   }
 
-  //Escape handler, discard changes
+  //Escape handler, discard changes, close the form
   handleKeyDown(event) {
     if (event.key === 'Escape') {
       event.preventDefault()
@@ -70,7 +72,8 @@ class TableCellContainer extends React.Component {
   }
 
   render() {
-    let tableCell = (
+    return (
+      <td className="touch" onClick={this.handleClick} >
         <TableCell  type={this.type}
                     options={this.props.column.options}
                     editable={this.state.editable}
@@ -81,11 +84,6 @@ class TableCellContainer extends React.Component {
                     handleKeyDown={this.handleKeyDown}
                     handleClick={this.handleClick}
                     handleSubmit={this.handleSubmit} />
-      )
-
-    return (
-      <td className="touch" onClick={this.handleClick} >
-        {tableCell}
         {this.props.isHead ? <FilterFormContainer column={this.props.column} />
         : null }
       </td>

@@ -37,11 +37,11 @@ const TableCell = props => (
 )
 
 TableCell.propTypes = {
-  type:           PropTypes.string.isRequired,
-  column:         PropTypes.object.isRequired,
-  value:          PropTypes.string,
-  editable:       PropTypes.bool,
-  options:        PropTypes.array,
+  type:           PropTypes.string.isRequired,  //the input's type
+  column:         PropTypes.object.isRequired,  //column date
+  value:          PropTypes.string,             //initial value
+  editable:       PropTypes.bool,               //are we showing a form or a value
+  options:        PropTypes.array,              //for selects only, [] for the rest
   handleChange:   PropTypes.func.isRequired,
   handleClick:    PropTypes.func.isRequired,
   handleSubmit:   PropTypes.func.isRequired,

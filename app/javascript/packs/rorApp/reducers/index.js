@@ -37,6 +37,7 @@ const store = createStore(
   )
 )
 
+//Initial data loading
 store.dispatch(fetchRows()).then((rows) => console.log("Rows are loaded:", rows))
 store.dispatch(fetchColumns()).then((columns) => console.log("Columns are loaded:", columns))
 store.dispatch(loadFilters())

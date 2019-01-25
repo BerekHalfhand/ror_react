@@ -1,5 +1,5 @@
 import {
-  identify,
+  identify,             //._id.$oid -> .id()
   COLUMNS_FETCH,
   COLUMNS_ADD_REQUEST,
   COLUMNS_ADD_SUCCESS,
@@ -21,7 +21,7 @@ function columns(state = [], action) {
       })
 
     case COLUMNS_ADD_SUCCESS:
-      data = identify(action.payload.response)
+      data = identify([action.payload.response])      //single column instance, hence []
       if (state.items) items = state.items.slice(0)
       items = items.concat(data)
 

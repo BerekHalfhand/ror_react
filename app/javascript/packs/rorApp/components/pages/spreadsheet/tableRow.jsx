@@ -11,8 +11,7 @@ const TableRow = props => (
     <td className="row-number">{props.num}</td>
     {props.columns && props.columns.items && props.columns.items.map((column, i) => {
       let values = props.row.values,
-          columnId = column && column._id && column.id(),
-          value  = values && values[columnId] ? values[columnId] : "";
+          value  = values && values[column.id()] ? values[column.id()] : "";
       return (
         <TableCellContainer key={i} value={value} row={props.row} column={column} />
       );

@@ -8,9 +8,6 @@ import Spreadsheet from './spreadsheet'
 class SpreadsheetContainer extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      showForm: false,
-    }
     autoBind(this)
   }
 
@@ -26,12 +23,14 @@ class SpreadsheetContainer extends React.Component {
 
         switch (filter.type) {
           case 'text':
-            if (value.toLowerCase() != filter.values[0].toLowerCase())
+          //does this value contain query text
+            if (value.toLowerCase().indexOf(filter.values[0].toLowerCase()) < 0)
               match = false
 
             break;
 
           case 'number':
+          //is it between given numbers
             if (filter.values[0] && value < filter.values[0] ||
                 filter.values[1] && value > filter.values[1])
               match = false
@@ -39,6 +38,7 @@ class SpreadsheetContainer extends React.Component {
             break;
 
           case 'date':
+          //is it between given dates
             value = new Date(value)
 
             if (filter.values[0] && value < new Date(filter.values[0]) ||
@@ -48,8 +48,9 @@ class SpreadsheetContainer extends React.Component {
             break;
 
           default:
-          if (value != filter.values[0])
-            match = false
+          //this must be a select, straight matching
+            if (value != filter.values[0])
+              match = false
         }
       }
 
@@ -68,7 +69,7 @@ class SpreadsheetContainer extends React.Component {
     if (this.props.filters.items &&
         this.props.filters.items.length &&
         this.props.filters.isActive) {
-
+      //filters are active and present
       filteredItems = rows.items.filter(this.runFilters)
 
       filteredItems.map((item, i) => {
@@ -76,6 +77,7 @@ class SpreadsheetContainer extends React.Component {
       })
 
     } else {
+      //or not, returning an array with all the IDs
       rows.items.map((item, i) => {
         res.push(item.id())
       })

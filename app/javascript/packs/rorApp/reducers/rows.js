@@ -1,5 +1,5 @@
 import {
-  identify,
+  identify,             //._id.$oid -> .id()
   ROWS_FETCH,
   ROWS_ADD_REQUEST,
   ROWS_ADD_SUCCESS,
@@ -21,7 +21,7 @@ function rows(state = [], action) {
       })
 
     case ROWS_ADD_SUCCESS:
-      data = identify(action.payload.response)
+      data = identify(action.payload.response)      //array of new rows
       if (state.items) items = state.items.slice(0)
       items = items.concat(data)
 

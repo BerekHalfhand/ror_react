@@ -40,6 +40,8 @@ class FilterFormContainer extends React.Component {
       column: this.props.column.id(),
       values: [this.state.value1, this.state.value2]
     }
+
+    //make sure numbers are stored as such
     if (filter.type == 'number') filter.values = [parseInt(filter.values[0]), parseInt(filter.values[1])]
 
     this.props.addFilter(filter)
@@ -47,7 +49,7 @@ class FilterFormContainer extends React.Component {
   }
 
   clearFilter(event) {
-    event.stopPropagation()
+    event.stopPropagation()   //avoiding the parent's event handlers
     this.props.removeFilter(this.props.activeFilter.column)
     this.resetForm()
   }

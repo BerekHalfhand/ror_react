@@ -31,11 +31,13 @@ class NewColumnContainer extends React.Component {
       event.preventDefault()
 
       let options = []
-      if (this.state.options) options = this.state.options.split(',')
-
-      options = options.map(function(item) {
-        return item.trim();
-      });
+      //options are only there for 'select' types
+      if (this.state.options) {
+        options = this.state.options.split(',')
+        options = options.map(function(item) {
+          return item.trim();
+        })
+      }
 
       let column = {
         title: this.state.title,
@@ -53,6 +55,8 @@ class NewColumnContainer extends React.Component {
           value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
 
       this.setState({ [key]: value })
+
+      //if the type chosen is 'select', show the input for its future options
       if (key == 'type') this.setState({showOptions: value == 'select'})
     }
 
