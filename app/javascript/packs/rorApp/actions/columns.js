@@ -7,10 +7,10 @@ export const COLUMNS_EDIT_SUCCESS  = 'COLUMNS_EDIT_SUCCESS'
 export const COLUMNS_EDIT_FAILURE  = 'COLUMNS_EDIT_FAILURE'
 
 // Action creators
-export const receiveColumns = data => ({
+export const receiveColumns = (response) => ({
   type: COLUMNS_FETCH,
   payload: {
-    data
+    response
   }
 })
 

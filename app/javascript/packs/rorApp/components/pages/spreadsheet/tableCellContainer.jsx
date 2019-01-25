@@ -24,7 +24,6 @@ class TableCellContainer extends React.Component {
     }
 
     this.type = this.props.isHead ? 'text' : this.props.column.type
-
     autoBind(this)
   }
 
@@ -52,7 +51,7 @@ class TableCellContainer extends React.Component {
       column.title = value
       this.props.editColumns(column)
     } else
-      this.props.editRows(this.props.row._id.$oid, this.props.column._id.$oid, this.state.newValue)
+      this.props.editRows(this.props.row.id(), this.props.column.id(), this.state.newValue)
 
     this.setState({
       editable: false

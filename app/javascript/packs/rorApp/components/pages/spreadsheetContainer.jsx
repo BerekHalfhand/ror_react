@@ -72,12 +72,12 @@ class SpreadsheetContainer extends React.Component {
       filteredItems = rows.items.filter(this.runFilters)
 
       filteredItems.map((item, i) => {
-        res.push(item._id.$oid)
+        res.push(item.id())
       })
 
     } else {
       rows.items.map((item, i) => {
-        res.push(item._id.$oid)
+        res.push(item.id())
       })
     }
 

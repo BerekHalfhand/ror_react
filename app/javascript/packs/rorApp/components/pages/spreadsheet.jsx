@@ -36,10 +36,10 @@ const Spreadsheet = (props) => (
           </thead>
           <tbody>
             {props.rows && props.rows.items.map((row, i) => {
-              return row._id ? (<TableRow key={row._id.$oid}
+              return row._id ? (<TableRow key={row.id()}
                                           num={++i}
                                           row={row}
-                                          className={!props.filteredRows.includes(row._id.$oid) ? "d-none" : "" }
+                                          className={!props.filteredRows.includes(row.id()) ? "d-none" : "" }
                                 />)
                              : null
             }, this)}

@@ -37,7 +37,7 @@ class FilterFormContainer extends React.Component {
 
     let filter = {
       type: this.props.column.type,
-      column: this.props.column._id.$oid,
+      column: this.props.column.id(),
       values: [this.state.value1, this.state.value2]
     }
     if (filter.type == 'number') filter.values = [parseInt(filter.values[0]), parseInt(filter.values[1])]
@@ -80,7 +80,7 @@ FilterFormContainer.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   let activeFilter = null
   state.filters.items.map((item, i) => {
-    if (item.column == ownProps.column._id.$oid)
+    if (item.column == ownProps.column.id())
       activeFilter = item
   })
 

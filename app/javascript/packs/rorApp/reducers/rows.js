@@ -1,4 +1,5 @@
 import {
+  identify,
   ROWS_FETCH,
   ROWS_ADD_REQUEST,
   ROWS_ADD_SUCCESS,
@@ -9,20 +10,20 @@ import {
 } from '../actions'
 
 function rows(state = [], action) {
-  let items = []
+  let items = [], data
 
   switch (action.type) {
     case ROWS_FETCH:
-      let {data} = action.payload
+      data = identify(action.payload.response)
       return Object.assign({}, state, {
         isFetching: false,
         items: data,
       })
 
     case ROWS_ADD_SUCCESS:
-      let {response} = action.payload
+      data = identify(action.payload.response)
       if (state.items) items = state.items.slice(0)
-      items = items.concat(response)
+      items = items.concat(data)
 
       return Object.assign({}, state, {
         isFetching: false,

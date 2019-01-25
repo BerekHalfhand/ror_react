@@ -7,10 +7,10 @@ export const ROWS_EDIT_SUCCESS  = 'ROWS_EDIT_SUCCESS'
 export const ROWS_EDIT_FAILURE  = 'ROWS_EDIT_FAILURE'
 
 // Action creators
-export const receiveRows = data => ({
+export const receiveRows = (response) => ({
   type: ROWS_FETCH,
   payload: {
-    data
+    response
   }
 })
 

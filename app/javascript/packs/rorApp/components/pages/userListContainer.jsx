@@ -49,7 +49,7 @@ export default class UserListContainer extends React.Component {
 
   removeUser (id) {
     var newUsers = this.state.users.filter((user) => {
-      return user._id.$oid != id
+      return user.id() != id
     })
 
     this.setState({ users: newUsers })
