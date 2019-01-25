@@ -20,11 +20,8 @@ function columns(state = [], action) {
       })
 
     case COLUMNS_ADD_SUCCESS:
-      // console.log('addColumnsSuccess action -> ', action)
       let {response} = action.payload
-
       if (state.items) items = state.items.slice(0)
-
       items = items.concat(response)
 
       return Object.assign({}, state, {
@@ -33,12 +30,9 @@ function columns(state = [], action) {
       })
 
     case COLUMNS_EDIT_SUCCESS:
-      // console.log('editColumnsSuccess action -> ', action)
       let updatedColumn = action.payload.response
-
       state.items.forEach((v, i) => {
         if (v._id.$oid === updatedColumn._id.$oid) v.values = updatedColumn.values
-
         items.push(v);
       })
 
@@ -59,7 +53,7 @@ function columns(state = [], action) {
     case COLUMNS_ADD_FAILURE:
     case COLUMNS_EDIT_FAILURE:
       let {error} = action.payload
-      console.error('An error occurred.', action)
+      console.error('An error occurred.', error)
 
       return Object.assign({}, state, {
         isFetching: false,

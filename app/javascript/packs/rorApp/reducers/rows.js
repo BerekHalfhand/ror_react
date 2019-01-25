@@ -20,11 +20,8 @@ function rows(state = [], action) {
       })
 
     case ROWS_ADD_SUCCESS:
-      // console.log('addRowsSuccess action -> ', action)
       let {response} = action.payload
-
       if (state.items) items = state.items.slice(0)
-
       items = items.concat(response)
 
       return Object.assign({}, state, {
@@ -33,16 +30,13 @@ function rows(state = [], action) {
       })
 
     case ROWS_EDIT_SUCCESS:
-      // console.log('editRowsSuccess action -> ', action)
       let updatedRow = action.payload.response
-
       state.items.forEach((v, i) => {
         if (v._id.$oid === updatedRow._id.$oid) v.values = updatedRow.values
 
         items.push(v);
       })
 
-      // console.dir(items)
       return Object.assign({}, state, {
         isFetching: false,
         items: items,
@@ -57,7 +51,7 @@ function rows(state = [], action) {
     case ROWS_ADD_FAILURE:
     case ROWS_EDIT_FAILURE:
       let {error} = action.payload
-      console.error('An error occurred.', action)
+      console.error('An error occurred.', error)
 
       return Object.assign({}, state, {
         isFetching: false,

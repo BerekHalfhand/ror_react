@@ -32,13 +32,13 @@ const store = createStore(
   initialState,
   composeWithDevTools(
     applyMiddleware(
-      thunkMiddleware, // lets us dispatch() functions
+      thunkMiddleware,
     )
   )
 )
 
 store.dispatch(fetchRows()).then((rows) => console.log("Rows are loaded:", rows))
 store.dispatch(fetchColumns()).then((columns) => console.log("Columns are loaded:", columns))
-store.dispatch(loadFilters())//.then((filters) => console.log("Filters are loaded:", filters))
+store.dispatch(loadFilters())
 
 export default store

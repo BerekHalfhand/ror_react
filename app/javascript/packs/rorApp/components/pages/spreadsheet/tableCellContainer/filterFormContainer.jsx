@@ -16,17 +16,10 @@ class FilterFormContainer extends React.Component {
     this.state = {
       value1: null,
       value2: null,
-      filter: null,
     }
     this.baseState = this.state
 
     autoBind(this)
-  }
-
-  componentDidMount() {
-    this.props.filters.items.map((item, i) => {
-      if (item.column == this.props.column._id.$oid) this.setState({filter: item})
-    })
   }
 
   resetForm() {
@@ -51,12 +44,11 @@ class FilterFormContainer extends React.Component {
 
     this.props.addFilter(filter)
     this.resetForm()
-    this.setState({filter: filter})
   }
 
   clearFilter(event) {
     event.stopPropagation()
-    this.props.removeFilter(this.state.filter.column)
+    this.props.removeFilter(this.props.activeFilter.column)
     this.resetForm()
   }
 
@@ -65,7 +57,7 @@ class FilterFormContainer extends React.Component {
 
     return (
       <React.Fragment>
-        {this.state.filter ?
+        {this.props.activeFilter ?
           <Button color="danger" className="m-1 touch" onClick={(e) => {this.clearFilter(e)}}>X</Button>
         :
           <ModalForm handleSubmit={this.handleSubmit}
@@ -84,6 +76,15 @@ FilterFormContainer.propTypes = {
   column:   PropTypes.object.isRequired,   //column data
 }
 
-const mapStateToProps = state => ({ ...state })
+// activeFilter defines if there is a filter applied and how to present it
+const mapStateToProps = (state, ownProps) => {
+  let activeFilter = null
+  state.filters.items.map((item, i) => {
+    if (item.column == ownProps.column._id.$oid)
+      activeFilter = item
+  })
+
+  return {activeFilter, ...state}
+}
 
 export default connect(mapStateToProps, { addFilter, removeFilter })(FilterFormContainer)

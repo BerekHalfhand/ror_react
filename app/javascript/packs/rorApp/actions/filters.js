@@ -76,7 +76,7 @@ export function removeFilter(columnId) {
         if (index > -1) {
           filters.items.splice(index, 1)
           sessionStorage.setItem('filters', JSON.stringify(filters))
-          // console.log('filters', filters)
+          
           dispatch(removeFilters(filters))
         }
       }
