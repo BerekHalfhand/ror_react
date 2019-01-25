@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';
 
 // Components
-import UserItem from 'packs/rorApp/components/userList/userTable/userItem';
+import UserItem from 'packs/rorApp/components/pages/userList/userTable/userItem';
 
 const user = { username: 'username', fullname: 'fullname', password: 'password', email: 'email', _id: {$oid: "5c4258569375b06aa90b6718"} };
 const onDeleteSpy = jest.fn();

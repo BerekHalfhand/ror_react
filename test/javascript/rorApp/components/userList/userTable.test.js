@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';
 
 // Components
-import UserTable from 'packs/rorApp/components/userList/userTable';
+import UserTable from 'packs/rorApp/components/pages/userList/userTable';
 
 const users = [{ username: 'username', fullname: 'fullname', password: 'password', email: 'email', _id: {$oid: "5c4258569375b06aa90b6718"} }];
 const onDelete = jest.fn();

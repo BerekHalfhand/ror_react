@@ -38,7 +38,7 @@ export default class UserTable extends React.Component {
     // console.log('renderPopulatedTable');
 
     var list = this.state.users.map(function(user) {
-      let id = user && user._id && user.id() && user.id();
+      let id = user && user._id && user._id.$oid && user._id.$oid;
 
       return (
         <UserItem key={id} id={id} user={user}
