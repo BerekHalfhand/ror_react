@@ -34,7 +34,6 @@ function rows(state = [], action) {
       let updatedRow = action.payload.response
       state.items.forEach((v, i) => {
         if (v._id.$oid === updatedRow._id.$oid) v.values = updatedRow.values
-
         items.push(v);
       })
 

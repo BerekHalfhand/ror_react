@@ -5,31 +5,10 @@ export const FILTERS_TOGGLE   = 'FILTERS_TOGGLE'
 
 
 // Action creators
-export const fetchFilters = (filters) => ({
-  type: FILTERS_FETCH,
-  payload: {
-    filters
-  }
-})
-export const addFilters = (filter) => ({
-  type: FILTERS_ADD,
-  payload: {
-    filter
-  }
-})
-export const removeFilters = (filters) => ({
-  type: FILTERS_REMOVE,
-  payload: {
-    filters
-  }
-})
-export const toggleFilters = (value) => ({
-  type: FILTERS_TOGGLE,
-  payload: {
-    value
-  }
-})
-
+export const fetchFilters = (filters) => ({ type: FILTERS_FETCH, payload: {filters} })
+export const addFilters = (filter) => ({ type: FILTERS_ADD, payload: {filter} })
+export const removeFilters = (filters) => ({ type: FILTERS_REMOVE, payload: {filters} })
+export const toggleFilters = (value) => ({ type: FILTERS_TOGGLE, payload: {value} })
 
 function readStorage(key) {
   let res = sessionStorage.getItem(key)

@@ -7,50 +7,22 @@ export const ROWS_EDIT_SUCCESS  = 'ROWS_EDIT_SUCCESS'
 export const ROWS_EDIT_FAILURE  = 'ROWS_EDIT_FAILURE'
 
 // Action creators
-export const receiveRows = (response) => ({
-  type: ROWS_FETCH,
-  payload: {
-    response
-  }
-})
+export const receiveRows = (response) => ({ type: ROWS_FETCH, payload: {response} })
 
-export const addRowsRequest = () => ({
-  type: ROWS_ADD_REQUEST,
-})
-export const addRowsSuccess = (response) => ({
-  type: ROWS_ADD_SUCCESS,
-  payload: {
-    response
-  }
-})
-export const addRowsFail = (error) => ({
-  type: ROWS_ADD_FAILURE,
-  payload: {
-    error
-  }
-})
-export const editRowsRequest = () => ({
-  type: ROWS_EDIT_REQUEST,
-})
-export const editRowsSuccess = (response) => ({
-  type: ROWS_EDIT_SUCCESS,
-  payload: {
-    response
-  }
-})
-export const editRowsFailure = (error) => ({
-  type: ROWS_EDIT_FAILURE,
-  payload: {
-    error
-  }
-})
+export const addRowsRequest = () => ({ type: ROWS_ADD_REQUEST })
+export const addRowsSuccess = (response) => ({ type: ROWS_ADD_SUCCESS, payload: {response} })
+export const addRowsFail = (error) => ({ type: ROWS_ADD_FAILURE, payload: {error} })
+
+export const editRowsRequest = () => ({ type: ROWS_EDIT_REQUEST })
+export const editRowsSuccess = (response) => ({ type: ROWS_EDIT_SUCCESS, payload: {response} })
+export const editRowsFailure = (error) => ({ type: ROWS_EDIT_FAILURE, payload: {error} })
 
 export function fetchRows() {
   return function(dispatch) {
     return $.ajax({url: "/api/v1/row.json", type: "GET"})
     .then(
       response => dispatch(receiveRows(response)),
-      error => console.log('An error occurred.', error)
+      error => console.error('An error occurred.', error)
     )
   }
 }

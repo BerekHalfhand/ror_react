@@ -1,7 +1,7 @@
 ## Overview
 A basic single-page app providing the following features:
 * Dynamic spreadsheet with filters              (/spreadsheet)
-* Minimal CRUD interface for a table of users   (/userList)
+* Minimal CRUD interface for a table of users   (/userList)   <- Experimental, currently deprecated
 
 ![screenshot](https://screenshotscdn.firefoxusercontent.com/images/a400338d-dd53-426d-8961-2d32ec14dad6.png)
 
