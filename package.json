@@ -17,7 +17,7 @@
     "reactstrap": "^7.1.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "resolve-url-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
     "webpack-cli": "^3.2.1"
   },
   "devDependencies": {
