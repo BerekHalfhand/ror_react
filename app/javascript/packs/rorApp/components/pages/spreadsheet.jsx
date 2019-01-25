@@ -14,7 +14,7 @@ const Spreadsheet = (props) => (
   <article>
     <h1>Spreadsheet</h1>
 
-    <span className="float-right">
+    <span className={props.rows.items && props.rows.items.length ? "float-right" : "d-none"}>
       <label className="touch">
         <input  type="checkbox" className="m-1 align-bottom"
                 checked={props.filters.isActive}

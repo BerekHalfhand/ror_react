@@ -34,6 +34,17 @@ Server start (make sure mongod is running and accepting connections):
 
 `foreman start -f Procfile.dev -p 3000`
 
+## Usage
+
+Deploy the project, launch the server, open the application in a browser and click "Spreadsheet" button either in the header or in the sidebar.
+The Spreadsheet page will appear with a single button "Add column".
+Click it, choose the title for the new column, its type, and whether it will be a required column.
+Then click "Save".
+A table will appear with the newly created column title and a "?" button beside it.
+"?" button allows you to apply a filter to the column, but there should be some rows to filter first.
+Below the table will be a button labeled "Add 10 rows", which does just that, 10 new empty rows will be appended to the table body.
+
+
 **Areas of interest:**
 
 Front-end:    `app/javascript/packs/rorApp`

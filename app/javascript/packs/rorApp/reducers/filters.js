@@ -1,20 +1,15 @@
-import {
-  FILTERS_FETCH,
-  FILTERS_ADD,
-  FILTERS_REMOVE,
-  FILTERS_TOGGLE,
-} from '../actions'
+import * as C from '../constants'
 
 function filters(state = [], action) {
   let items = []
 
   switch (action.type) {
-    case FILTERS_FETCH:
-    case FILTERS_REMOVE:
+    case C.FILTERS_FETCH:
+    case C.FILTERS_REMOVE:
       let {filters} = action.payload
       return filters
 
-    case FILTERS_ADD:
+    case C.FILTERS_ADD:
       let {filter} = action.payload
       if (state.items) items = state.items.slice(0)
       items.push(filter)
@@ -24,7 +19,7 @@ function filters(state = [], action) {
         items: items,
       })
 
-    case FILTERS_TOGGLE:
+    case C.FILTERS_TOGGLE:
       let {value} = action.payload
       return Object.assign({}, state, {
         isActive: value || !state.isActive,

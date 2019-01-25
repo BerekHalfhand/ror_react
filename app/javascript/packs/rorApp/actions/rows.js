@@ -1,21 +1,15 @@
-export const ROWS_FETCH         = 'ROWS_FETCH'
-export const ROWS_ADD_REQUEST   = 'ROWS_ADD_REQUEST'
-export const ROWS_ADD_SUCCESS   = 'ROWS_ADD_SUCCESS'
-export const ROWS_ADD_FAILURE   = 'ROWS_ADD_FAILURE'
-export const ROWS_EDIT_REQUEST  = 'ROWS_EDIT_REQUEST'
-export const ROWS_EDIT_SUCCESS  = 'ROWS_EDIT_SUCCESS'
-export const ROWS_EDIT_FAILURE  = 'ROWS_EDIT_FAILURE'
+import * as C from '../constants'
 
 // Action creators
-export const receiveRows = (response) => ({ type: ROWS_FETCH, payload: {response} })
+export const receiveRows = (response) => ({ type: C.ROWS_FETCH, payload: {response} })
 
-export const addRowsRequest = () => ({ type: ROWS_ADD_REQUEST })
-export const addRowsSuccess = (response) => ({ type: ROWS_ADD_SUCCESS, payload: {response} })
-export const addRowsFail = (error) => ({ type: ROWS_ADD_FAILURE, payload: {error} })
+export const addRowsRequest = () => ({ type: C.ROWS_ADD_REQUEST })
+export const addRowsSuccess = (response) => ({ type: C.ROWS_ADD_SUCCESS, payload: {response} })
+export const addRowsFail = (error) => ({ type: C.ROWS_ADD_FAILURE, payload: {error} })
 
-export const editRowsRequest = () => ({ type: ROWS_EDIT_REQUEST })
-export const editRowsSuccess = (response) => ({ type: ROWS_EDIT_SUCCESS, payload: {response} })
-export const editRowsFailure = (error) => ({ type: ROWS_EDIT_FAILURE, payload: {error} })
+export const editRowsRequest = () => ({ type: C.ROWS_EDIT_REQUEST })
+export const editRowsSuccess = (response) => ({ type: C.ROWS_EDIT_SUCCESS, payload: {response} })
+export const editRowsFailure = (error) => ({ type: C.ROWS_EDIT_FAILURE, payload: {error} })
 
 export function fetchRows() {
   return function(dispatch) {

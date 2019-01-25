@@ -1,27 +1,18 @@
-import {
-  identify,             //._id.$oid -> .id()
-  COLUMNS_FETCH,
-  COLUMNS_ADD_REQUEST,
-  COLUMNS_ADD_SUCCESS,
-  COLUMNS_ADD_FAILURE,
-  COLUMNS_EDIT_REQUEST,
-  COLUMNS_EDIT_SUCCESS,
-  COLUMNS_EDIT_FAILURE,
-} from '../actions'
+import * as C from '../constants'
 
 function columns(state = [], action) {
   let items = [], data
   switch (action.type) {
-    case COLUMNS_FETCH:
-      data = identify(action.payload.response)
+    case C.COLUMNS_FETCH:
+      data = C.identify(action.payload.response)  //._id.$oid -> .id()
 
       return Object.assign({}, state, {
         isFetching: false,
         items: data,
       })
 
-    case COLUMNS_ADD_SUCCESS:
-      data = identify([action.payload.response])      //single column instance, hence []
+    case C.COLUMNS_ADD_SUCCESS:
+      data = C.identify([action.payload.response])      //single column instance, hence []
       if (state.items) items = state.items.slice(0)
       items = items.concat(data)
 
@@ -30,7 +21,7 @@ function columns(state = [], action) {
         items: items,
       })
 
-    case COLUMNS_EDIT_SUCCESS:
+    case C.COLUMNS_EDIT_SUCCESS:
       let updatedColumn = action.payload.response
       state.items.forEach((v, i) => {
         if (v._id.$oid === updatedColumn._id.$oid) v.values = updatedColumn.values
@@ -42,17 +33,17 @@ function columns(state = [], action) {
         items: items,
       })
 
-    case COLUMNS_EDIT_REQUEST:
+    case C.COLUMNS_EDIT_REQUEST:
       return state
 
-    case COLUMNS_ADD_REQUEST:
-    case COLUMNS_EDIT_REQUEST:
+    case C.COLUMNS_ADD_REQUEST:
+    case C.COLUMNS_EDIT_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
       })
 
-    case COLUMNS_ADD_FAILURE:
-    case COLUMNS_EDIT_FAILURE:
+    case C.COLUMNS_ADD_FAILURE:
+    case C.COLUMNS_EDIT_FAILURE:
       let {error} = action.payload
       console.error('An error occurred.', error)
 

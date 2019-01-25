@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
+import {isItemPresent} from 'packs/rorApp/constants'
 
 // Components
 import Spreadsheet from './spreadsheet'
@@ -14,43 +15,48 @@ class SpreadsheetContainer extends React.Component {
   //filter function, returns false if the row doesn't pass the checks, true otherwise
   runFilters (row) {
     let match = true
-
     this.props.filters.items.map((filter, i) => {
-      if (!row.values || $.isEmptyObject(row.values) || !row.values[filter.column])
-        match = false
-      else {
-        let value = row.values[filter.column]
 
-        switch (filter.type) {
-          case 'text':
-          //does this value contain query text
-            if (value.toLowerCase().indexOf(filter.values[0].toLowerCase()) < 0)
-              match = false
+      //sanity check against old filters
+      if (isItemPresent(this.props.columns.items, filter.column)) {
+        //if the item doesn't have this field filled
+        if (!row.values || $.isEmptyObject(row.values) || !row.values[filter.column])
+          match = false
+        //if it does
+        else {
+          let value = row.values[filter.column]
 
-            break;
+          switch (filter.type) {
+            case 'text':
+            //does this value contain query text
+              if (value.toLowerCase().indexOf(filter.values[0].toLowerCase()) < 0)
+                match = false
 
-          case 'number':
-          //is it between given numbers
-            if (filter.values[0] && value < filter.values[0] ||
-                filter.values[1] && value > filter.values[1])
-              match = false
+              break;
 
-            break;
+            case 'number':
+            //is it between given numbers
+              if (filter.values[0] && value < filter.values[0] ||
+                  filter.values[1] && value > filter.values[1])
+                match = false
 
-          case 'date':
-          //is it between given dates
-            value = new Date(value)
+              break;
 
-            if (filter.values[0] && value < new Date(filter.values[0]) ||
-                filter.values[1] && value > new Date(filter.values[1]))
-              match = false
+            case 'date':
+            //is it between given dates
+              value = new Date(value)
 
-            break;
+              if (filter.values[0] && value < new Date(filter.values[0]) ||
+                  filter.values[1] && value > new Date(filter.values[1]))
+                match = false
 
-          default:
-          //this must be a select, straight matching
-            if (value != filter.values[0])
-              match = false
+              break;
+
+            default:
+            //this must be a select, straight matching
+              if (value != filter.values[0])
+                match = false
+          }
         }
       }
 

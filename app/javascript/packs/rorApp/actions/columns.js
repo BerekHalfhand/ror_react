@@ -1,21 +1,15 @@
-export const COLUMNS_FETCH         = 'COLUMNS_FETCH'
-export const COLUMNS_ADD_REQUEST   = 'COLUMNS_ADD_REQUEST'
-export const COLUMNS_ADD_SUCCESS   = 'COLUMNS_ADD_SUCCESS'
-export const COLUMNS_ADD_FAILURE   = 'COLUMNS_ADD_FAILURE'
-export const COLUMNS_EDIT_REQUEST  = 'COLUMNS_EDIT_REQUEST'
-export const COLUMNS_EDIT_SUCCESS  = 'COLUMNS_EDIT_SUCCESS'
-export const COLUMNS_EDIT_FAILURE  = 'COLUMNS_EDIT_FAILURE'
+import * as C from '../constants'
 
 // Action creators
-export const receiveColumns = (response) => ({ type: COLUMNS_FETCH, payload: {response} })
+export const receiveColumns = (response) => ({ type: C.COLUMNS_FETCH, payload: {response} })
 
-export const addColumnsRequest = () => ({ type: COLUMNS_ADD_REQUEST, })
-export const addColumnsSuccess = (response) => ({ type: COLUMNS_ADD_SUCCESS, payload: {response} })
-export const addColumnsFailure = (error) => ({ type: COLUMNS_ADD_FAILURE, payload: {error} })
+export const addColumnsRequest = () => ({ type: C.COLUMNS_ADD_REQUEST, })
+export const addColumnsSuccess = (response) => ({ type: C.COLUMNS_ADD_SUCCESS, payload: {response} })
+export const addColumnsFailure = (error) => ({ type: C.COLUMNS_ADD_FAILURE, payload: {error} })
 
-export const editColumnsRequest = () => ({ type: COLUMNS_EDIT_REQUEST })
-export const editColumnsSuccess = (response) => ({ type: COLUMNS_EDIT_SUCCESS, payload: {response} })
-export const editColumnsFailure = (error) => ({ type: COLUMNS_EDIT_FAILURE, payload: {error} })
+export const editColumnsRequest = () => ({ type: C.COLUMNS_EDIT_REQUEST })
+export const editColumnsSuccess = (response) => ({ type: C.COLUMNS_EDIT_SUCCESS, payload: {response} })
+export const editColumnsFailure = (error) => ({ type: C.COLUMNS_EDIT_FAILURE, payload: {error} })
 
 export function fetchColumns() {
   return function(dispatch) {
