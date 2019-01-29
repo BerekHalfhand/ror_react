@@ -31,7 +31,9 @@ class ModalForm extends React.Component {
     return (
       <React.Fragment>
         <Button outline color={this.props.buttonColor} className="m-1 touch"
-                onClick={(e) => {e.stopPropagation (); this.toggle()}}>{this.props.buttonLabel}</Button>
+                onClick={(e) => {e.stopPropagation (); this.toggle()}}>
+                  {this.props.buttonLabel}
+        </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <Form onSubmit={(e) => this.props.handleSubmit(e)}>
             <ModalHeader toggle={this.toggle}>

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
-import { editRows, editColumns } from 'packs/rorApp/actions'
+import { editRows, editColumns, deleteColumns } from 'packs/rorApp/actions'
+import Octicon, {Beaker, Zap, X} from '@githubprimer/octicons-react'
 
 // Components
 import TableCell from './tableCellContainer/tableCell'
@@ -71,9 +72,14 @@ class TableCellContainer extends React.Component {
     }
   }
 
+  handleDelete(event, id) {
+    event.stopPropagation()
+    this.props.deleteColumns(id)
+  }
+
   render() {
     return (
-      <td className="touch" onClick={this.handleClick} >
+      <td className="touch table-cell" onClick={this.handleClick} >
         <TableCell  type={this.type}
                     options={this.props.column.options}
                     editable={this.state.editable}
@@ -84,7 +90,14 @@ class TableCellContainer extends React.Component {
                     handleKeyDown={this.handleKeyDown}
                     handleClick={this.handleClick}
                     handleSubmit={this.handleSubmit} />
-        {this.props.isHead ? <FilterFormContainer column={this.props.column} />
+        {this.props.isHead ?
+          <FilterFormContainer column={this.props.column} />
+        : null }
+        {this.props.isHead ?
+          <span className="float-right delete-button"
+                onClick={(e) => {this.handleDelete(e, this.props.column.id())}}>
+            <Octicon icon={X} />
+          </span>
         : null }
       </td>
     )
@@ -93,4 +106,4 @@ class TableCellContainer extends React.Component {
 
 const mapStateToProps = state => ({ ...state })
 
-export default connect(mapStateToProps, {editRows, editColumns})(TableCellContainer)
+export default connect(mapStateToProps, {editRows, editColumns, deleteColumns})(TableCellContainer)

@@ -10,7 +10,7 @@ class Api::V1::ColumnController < Api::V1::BaseController
 
   def destroy
     column = Column.find(params["id"])
-    respond_with column.destroy()
+    respond_with column.destroy(), json: {:id => params["id"]}
   end
 
   def update

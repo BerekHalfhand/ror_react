@@ -11,6 +11,10 @@ export const editColumnsRequest = () => ({ type: C.COLUMNS_EDIT_REQUEST })
 export const editColumnsSuccess = (response) => ({ type: C.COLUMNS_EDIT_SUCCESS, payload: {response} })
 export const editColumnsFailure = (error) => ({ type: C.COLUMNS_EDIT_FAILURE, payload: {error} })
 
+export const deleteColumnsRequest = () => ({ type: C.COLUMNS_DELETE_REQUEST })
+export const deleteColumnsSuccess = (response) => ({ type: C.COLUMNS_DELETE_SUCCESS, payload: {response} })
+export const deleteColumnsFailure = (error) => ({ type: C.COLUMNS_DELETE_FAILURE, payload: {error} })
+
 export function fetchColumns() {
   return function(dispatch) {
     return $.ajax({url: "/api/v1/column.json", type: "GET"})
@@ -40,7 +44,7 @@ export function addColumns(column) {
 export function editColumns(column) {
   return function(dispatch) {
     dispatch(editColumnsRequest())
-    let id = column._id.$oid
+    let id = column.id()
 
     return $.ajax({
       url: "/api/v1/column/"+id,
@@ -50,6 +54,21 @@ export function editColumns(column) {
     .then(
       response => dispatch(editColumnsSuccess(response)),
       error => dispatch(editColumnsFailure(error))
+    )
+  }
+}
+
+export function deleteColumns(id) {
+  return function(dispatch) {
+    dispatch(deleteColumnsRequest())
+
+    return $.ajax({
+      url: "/api/v1/column/"+id,
+      type: "DELETE",
+    })
+    .then(
+      response => dispatch(deleteColumnsSuccess(response)),
+      error => dispatch(deleteColumnsFailure(error))
     )
   }
 }
