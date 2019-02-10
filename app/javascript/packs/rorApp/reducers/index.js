@@ -26,16 +26,31 @@ const rootReducer = combineReducers({
   rows,
   filters,
 })
+let storeTmp = null
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(
+console.log(process.env.NODE_ENV)
+
+if (process.env.NODE_ENV == 'development') {
+  storeTmp = createStore(
+    rootReducer,
+    initialState,
+    composeWithDevTools(
+      applyMiddleware(
+        thunkMiddleware,
+      )
+    )
+  )
+} else {
+    storeTmp = createStore(
+    rootReducer,
+    initialState,
     applyMiddleware(
       thunkMiddleware,
     )
   )
-)
+}
+
+const store = storeTmp
 
 //Initial data loading
 store.dispatch(fetchRows()).then((rows) => console.log("Rows are loaded:", rows))
