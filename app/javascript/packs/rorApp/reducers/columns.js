@@ -4,7 +4,8 @@ function columns(state = [], action) {
   let items = [], data
   switch (action.type) {
     case C.COLUMNS_FETCH:
-      data = C.identify(action.payload.response)  //._id.$oid -> .id()
+      data = C.identify(action.payload.response)          //._id.$oid -> .id()
+      data.sort((a, b) => a.id().localeCompare(b.id()));  //sort by id in case DB doesn't
 
       return Object.assign({}, state, {
         isFetching: false,

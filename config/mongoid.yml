@@ -2,10 +2,6 @@ production:
   clients:
     default:
       uri: "mongodb://user1:pass1234@ds129085.mlab.com:29085/heroku_9nn1283z"
-      options:
-        read:
-          mode: :primary
-        max_pool_size: 1
 
 development:
   # Configure available database clients. (required)

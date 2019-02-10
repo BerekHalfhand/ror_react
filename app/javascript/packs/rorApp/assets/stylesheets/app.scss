@@ -50,11 +50,11 @@ $header-height: 85px;
   }
 
   .row-number, th {
-    width: 30px;
+    width: 45px;
   }
 }
 
-.delete-button { opacity: 0; }
+.delete-button { opacity: 0; }  
 
 .table-cell:hover {
   .delete-button {
