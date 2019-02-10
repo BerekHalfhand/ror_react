@@ -1,9 +1,11 @@
 production:
   clients:
     default:
-      database: heroku_9nn1283z
       hosts:
         - ds129085.mlab.com:29085
+      database: heroku_9nn1283z
+      username: user1
+      password: pass1234
       options:
         read:
           mode: :primary
