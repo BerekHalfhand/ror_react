@@ -1,13 +1,11 @@
 production:
   clients:
     default:
-      database: heroku_9nn1283z
       hosts:
         - ds129085.mlab.com:29085
-      options:
-        read:
-          mode: :primary
-        max_pool_size: 1
+      database: heroku_9nn1283z
+      username: user1
+      password: pass1234
 
 development:
   # Configure available database clients. (required)
