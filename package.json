@@ -38,7 +38,8 @@
     "webpack-dev-server": "2.11.2"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "yarn add --force node-sass"
   },
   "jest": {
     "roots": [
