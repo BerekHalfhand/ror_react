@@ -1,11 +1,7 @@
 production:
   clients:
     default:
-      hosts:
-        - ds129085.mlab.com:29085
-      database: heroku_9nn1283z
-      username: user1
-      password: pass1234
+      uri: "mongodb://user1:pass1234@ds129085.mlab.com:29085/heroku_9nn1283z"
 
 development:
   # Configure available database clients. (required)
