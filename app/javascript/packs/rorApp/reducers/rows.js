@@ -5,8 +5,9 @@ function rows(state = [], action) {
 
   switch (action.type) {
     case C.ROWS_FETCH:
-      data = C.identify(action.payload.response)          //._id.$oid -> .id()
-      data.sort((a, b) => a.id().localeCompare(b.id()));  //sort by id in case DB doesn't
+      data = C.identify(action.payload.response)  //._id.$oid -> .id()
+      if (data && data.length)                    //sort by id in case DB doesn't
+        data.sort((a, b) => a.id().localeCompare(b.id()));
 
       return Object.assign({}, state, {
         isFetching: false,
