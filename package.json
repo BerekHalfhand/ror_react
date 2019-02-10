@@ -39,7 +39,7 @@
   },
   "scripts": {
     "test": "jest",
-    "postinstall": "yarn add --force node-sass"
+    "heroku-postbuild": "yarn add --force node-sass"
   },
   "jest": {
     "roots": [
