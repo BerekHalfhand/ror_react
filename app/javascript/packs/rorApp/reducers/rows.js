@@ -7,7 +7,7 @@ function rows(state = [], action) {
     case C.ROWS_FETCH:
       data = C.identify(action.payload.response)  //._id.$oid -> .id()
       if (data && data.length)                    //sort by id in case DB doesn't
-        data.sort((a, b) => a.id().localeCompare(b.id()));
+        data.sort((a, b) => a.id().localeCompare(b.id()))
 
       return Object.assign({}, state, {
         isFetching: false,
@@ -26,9 +26,9 @@ function rows(state = [], action) {
 
     case C.ROWS_EDIT_SUCCESS:
       let updatedRow = action.payload.response
-      state.items.forEach((v, i) => {
+      state.items.forEach((v) => {
         if (v._id.$oid === updatedRow._id.$oid) v.values = updatedRow.values
-        items.push(v);
+        items.push(v)
       })
 
       return Object.assign({}, state, {

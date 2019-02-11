@@ -17,7 +17,7 @@ export const deleteColumnsFailure = (error) => ({ type: C.COLUMNS_DELETE_FAILURE
 
 export function fetchColumns() {
   return function(dispatch) {
-    return $.ajax({url: "/api/v1/column.json", type: "GET"})
+    return $.ajax({url: '/api/v1/column.json', type: 'GET'})
     .then(
       response => dispatch(receiveColumns(response)),
       error => console.error('An error occurred.', error)
@@ -30,8 +30,8 @@ export function addColumns(column) {
     dispatch(addColumnsRequest())
 
     return $.ajax({
-      url: "/api/v1/column",
-      type: "POST",
+      url: '/api/v1/column',
+      type: 'POST',
       data: { column },
     })
     .then(
@@ -47,8 +47,8 @@ export function editColumns(column) {
     let id = column.id()
 
     return $.ajax({
-      url: "/api/v1/column/"+id,
-      type: "PATCH",
+      url: '/api/v1/column/'+id,
+      type: 'PATCH',
       data: {column},
     })
     .then(
@@ -63,8 +63,8 @@ export function deleteColumns(id) {
     dispatch(deleteColumnsRequest())
 
     return $.ajax({
-      url: "/api/v1/column/"+id,
-      type: "DELETE",
+      url: '/api/v1/column/'+id,
+      type: 'DELETE',
     })
     .then(
       response => dispatch(deleteColumnsSuccess(response)),

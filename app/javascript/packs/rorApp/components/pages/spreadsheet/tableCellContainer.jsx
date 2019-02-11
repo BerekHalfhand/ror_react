@@ -11,11 +11,6 @@ import TableCell from './tableCellContainer/tableCell'
 import FilterFormContainer from './tableCellContainer/filterFormContainer'
 
 class TableCellContainer extends React.Component {
-  static propTypes = {
-    column: PropTypes.object.isRequired,  //column data
-    isHead: PropTypes.bool,               //does this cell represent a column?
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -102,6 +97,11 @@ class TableCellContainer extends React.Component {
       </td>
     )
   }
+}
+
+TableCellContainer.propTypes = {
+  column: PropTypes.object.isRequired,  //column data
+  isHead: PropTypes.bool,               //does this cell represent a column?
 }
 
 const mapStateToProps = state => ({ ...state })

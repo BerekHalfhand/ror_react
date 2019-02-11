@@ -1,16 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Label, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap'
+import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap'
 
-const Options = props => (
-  <React.Fragment>
-    <option value=""></option>
-    {props.options.map((option, i) => {
-      return <option key={i} value={option}>{option}</option>
-    }, this)}
-  </React.Fragment>
-)
+// Components
+import Options from '../options'
 
 const FilterForm = props => (
   <React.Fragment>

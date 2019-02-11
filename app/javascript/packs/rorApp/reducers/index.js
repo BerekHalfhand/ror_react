@@ -27,10 +27,10 @@ const rootReducer = combineReducers({
 })
 let storeTmp = null
 
-console.log(process.env.NODE_ENV)
+// console.log(process.env.NODE_ENV)
 
 if (process.env.NODE_ENV == 'development') {
-  const devtools = require("redux-devtools-extension")
+  const devtools = require('redux-devtools-extension')
 
   storeTmp = createStore(
     rootReducer,
@@ -54,8 +54,8 @@ if (process.env.NODE_ENV == 'development') {
 const store = storeTmp
 
 //Initial data loading
-store.dispatch(fetchRows()).then((rows) => console.log("Rows are loaded:", rows))
-store.dispatch(fetchColumns()).then((columns) => console.log("Columns are loaded:", columns))
+store.dispatch(fetchRows()).then((rows) => console.log('Rows are loaded:', rows))
+store.dispatch(fetchColumns()).then((columns) => console.log('Columns are loaded:', columns))
 store.dispatch(loadFilters())
 
 export default store

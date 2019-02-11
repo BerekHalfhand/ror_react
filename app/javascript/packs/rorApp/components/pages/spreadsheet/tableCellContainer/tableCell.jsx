@@ -3,14 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button, Form, Input, InputGroup, InputGroupAddon } from 'reactstrap'
 
-const Options = props => (
-  <React.Fragment>
-    <option value=""></option>
-    {props.options.map((option, i) => {
-      return <option key={i} value={option}>{option}</option>
-    }, this)}
-  </React.Fragment>
-)
+// Components
+import Options from './options'
 
 const TableCell = props => (
   <React.Fragment>

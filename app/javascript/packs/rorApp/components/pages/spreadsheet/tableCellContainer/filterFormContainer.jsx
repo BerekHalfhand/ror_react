@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
 import { Button } from 'reactstrap'
-import { addFilter, removeFilter, toggleFilters } from 'packs/rorApp/actions'
+import { addFilter, removeFilter } from 'packs/rorApp/actions'
 
 // Components
 import ModalForm from 'packs/rorApp/components/modalForm'
@@ -81,7 +80,7 @@ FilterFormContainer.propTypes = {
 // activeFilter defines if there is a filter applied and how to present it
 const mapStateToProps = (state, ownProps) => {
   let activeFilter = null
-  state.filters.items.map((item, i) => {
+  state.filters.items.map((item) => {
     if (item.column == ownProps.column.id())
       activeFilter = item
   })

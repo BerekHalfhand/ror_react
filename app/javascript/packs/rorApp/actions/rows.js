@@ -13,7 +13,7 @@ export const editRowsFailure = (error) => ({ type: C.ROWS_EDIT_FAILURE, payload:
 
 export function fetchRows() {
   return function(dispatch) {
-    return $.ajax({url: "/api/v1/row.json", type: "GET"})
+    return $.ajax({url: '/api/v1/row.json', type: 'GET'})
     .then(
       response => dispatch(receiveRows(response)),
       error => console.error('An error occurred.', error)
@@ -26,8 +26,8 @@ export function addRows(quantity) {
     dispatch(addRowsRequest())
 
     return $.ajax({
-      url: "/api/v1/row",
-      type: "POST",
+      url: '/api/v1/row',
+      type: 'POST',
       data: { quantity: quantity },
     })
     .then(
@@ -42,8 +42,8 @@ export function editRows(id, column, value) {
     dispatch(editRowsRequest())
 
     return $.ajax({
-      url: "/api/v1/row/"+id,
-      type: "PATCH",
+      url: '/api/v1/row/'+id,
+      type: 'PATCH',
       data: {
         column: column,
         value: value,

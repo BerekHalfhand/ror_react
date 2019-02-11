@@ -15,7 +15,7 @@ class SpreadsheetContainer extends React.Component {
   //filter function, returns false if the row doesn't pass the checks, true otherwise
   runFilters (row) {
     let match = true
-    this.props.filters.items.map((filter, i) => {
+    this.props.filters.items.map((filter) => {
 
       //sanity check against old filters
       if (isItemPresent(this.props.columns.items, filter.column)) {
@@ -32,7 +32,7 @@ class SpreadsheetContainer extends React.Component {
               if (value.toLowerCase().indexOf(filter.values[0].toLowerCase()) < 0)
                 match = false
 
-              break;
+              break
 
             case 'number':
             //is it between given numbers
@@ -40,7 +40,7 @@ class SpreadsheetContainer extends React.Component {
                   filter.values[1] && value > filter.values[1])
                 match = false
 
-              break;
+              break
 
             case 'date':
             //is it between given dates
@@ -50,7 +50,7 @@ class SpreadsheetContainer extends React.Component {
                   filter.values[1] && value > new Date(filter.values[1]))
                 match = false
 
-              break;
+              break
 
             default:
             //this must be a select, straight matching
@@ -78,13 +78,13 @@ class SpreadsheetContainer extends React.Component {
       //filters are active and present
       filteredItems = rows.items.filter(this.runFilters)
 
-      filteredItems.map((item, i) => {
+      filteredItems.map((item) => {
         res.push(item.id())
       })
 
     } else {
       //or not, returning an array with all the IDs
-      rows.items.map((item, i) => {
+      rows.items.map((item) => {
         res.push(item.id())
       })
     }

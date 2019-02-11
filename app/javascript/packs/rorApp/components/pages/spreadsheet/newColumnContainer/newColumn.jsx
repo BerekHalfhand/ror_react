@@ -1,8 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { FormGroup, Label, Input } from 'reactstrap'
 
 const NewColumn = props => (
   <React.Fragment>
@@ -36,7 +34,7 @@ const NewColumn = props => (
                 {['text', 'number', 'date', 'select'].map((option, i) => {
                   return (
                     <option key={i} value={option}>{option}</option>
-                  );
+                  )
                 }, this)}
       </Input>
     </FormGroup>

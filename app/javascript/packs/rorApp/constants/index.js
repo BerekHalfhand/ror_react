@@ -30,7 +30,7 @@ export const FILTERS_TOGGLE           = 'FILTERS_TOGGLE'
 //returns bool
 export const isItemPresent = (collection, id) => {
   let res = false
-  collection.map((item, i) => {
+  collection.map((item) => {
     if (item.id() == id) res = true
   })
   return res
@@ -41,7 +41,7 @@ export const isItemPresent = (collection, id) => {
 export const identify = (arr) => {
   if (!$.isArray(arr)) return arr
   let res = []
-  arr.map((item, i) => {
+  arr.map((item) => {
     item.id = () => {return item._id.$oid}
     res.push(item)
   })

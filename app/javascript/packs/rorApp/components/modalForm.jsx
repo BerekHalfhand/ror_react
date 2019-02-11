@@ -4,14 +4,6 @@ import autoBind from 'react-autobind'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap'
 
 class ModalForm extends React.Component {
-  static propTypes = {
-    body:         PropTypes.element.isRequired,   //what to render in the form
-    buttonLabel:  PropTypes.string,               //what to write on the toggling button
-    buttonColor:  PropTypes.string,               //must be one of Bootstrap 4 button colors
-    title:        PropTypes.string,               //what to write on top of it all
-    handleSubmit: PropTypes.func.isRequired,      //what to do on submit
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -24,7 +16,7 @@ class ModalForm extends React.Component {
   toggle() {
     this.setState({
       modal: !this.state.modal
-    });
+    })
   }
 
   render() {
@@ -51,6 +43,15 @@ class ModalForm extends React.Component {
       </React.Fragment>
     )
   }
+}
+
+ModalForm.propTypes = {
+  body:         PropTypes.element.isRequired,   //what to render in the form
+  buttonLabel:  PropTypes.string,               //what to write on the toggling button
+  buttonColor:  PropTypes.string,               //must be one of Bootstrap 4 button colors
+  title:        PropTypes.string,               //what to write on top of it all
+  className:    PropTypes.string,               //CSS class for modal window
+  handleSubmit: PropTypes.func.isRequired,      //what to do on submit
 }
 
 export default ModalForm

@@ -6,7 +6,7 @@ function columns(state = [], action) {
     case C.COLUMNS_FETCH:
       data = C.identify(action.payload.response)  //._id.$oid -> .id()
       if (data && data.length)                    //sort by id in case DB doesn't
-        data.sort((a, b) => a.id().localeCompare(b.id()));
+        data.sort((a, b) => a.id().localeCompare(b.id()))
 
       return Object.assign({}, state, {
         isFetching: false,
@@ -38,18 +38,15 @@ function columns(state = [], action) {
 
     case C.COLUMNS_EDIT_SUCCESS:
       let updatedColumn = action.payload.response
-      state.items.forEach((v, i) => {
+      state.items.forEach((v) => {
         if (v._id.$oid === updatedColumn._id.$oid) v.values = updatedColumn.values
-        items.push(v);
+        items.push(v)
       })
 
       return Object.assign({}, state, {
         isFetching: false,
         items: items,
       })
-
-    case C.COLUMNS_EDIT_REQUEST:
-      return state
 
     case C.COLUMNS_ADD_REQUEST:
     case C.COLUMNS_EDIT_REQUEST:

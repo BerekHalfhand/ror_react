@@ -1,17 +1,14 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addColumn } from './actions/index'
 
 
-import Header from './components/header';
-import Sidebar from './components/sidebar';
-import LandingPage from './components/pages/landingPage';
-import UserListContainer from './components/pages/userListContainer';
-import SpreadsheetContainer from './components/pages/spreadsheetContainer';
+import Header from './components/header'
+import Sidebar from './components/sidebar'
+import LandingPage from './components/pages/landingPage'
+import UserListContainer from './components/pages/userListContainer'
+import SpreadsheetContainer from './components/pages/spreadsheetContainer'
 
 const App = props => (
   <section className="row layout">
@@ -25,9 +22,9 @@ const App = props => (
   </section>
 )
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({ ...state })
 // const mapDispatchToProps = dispatch => ({
 //   // handleOnLogin: data => dispatch(actions.onLogin(data)),
 // });
 
-export default connect(mapStateToProps, {addColumn})(App);
+export default connect(mapStateToProps, {addColumn})(App)

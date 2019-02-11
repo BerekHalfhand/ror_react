@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
@@ -13,9 +12,9 @@ class NewColumnContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "",
-      type: "text",
-      options: "",
+      title: '',
+      type: 'text',
+      options: '',
       isRequired: false,
     }
     this.baseState = this.state
@@ -28,37 +27,37 @@ class NewColumnContainer extends React.Component {
   }
 
   handleSubmit (event) {
-      event.preventDefault()
+    event.preventDefault()
 
-      let options = []
-      //options are only there for 'select' types
-      if (this.state.options) {
-        options = this.state.options.split(',')
-        options = options.map(function(item) {
-          return item.trim();
-        })
-      }
-
-      let column = {
-        title: this.state.title,
-        isRequired: this.state.isRequired,
-        type: this.state.type,
-        options: options,
-      }
-
-      this.resetForm()
-      this.props.addColumns(column)
+    let options = []
+    //options are only there for 'select' types
+    if (this.state.options) {
+      options = this.state.options.split(',')
+      options = options.map(function(item) {
+        return item.trim()
+      })
     }
 
-    handleChange (event) {
-      let key = event.target.name,
-          value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
-
-      this.setState({ [key]: value })
-
-      //if the type chosen is 'select', show the input for its future options
-      if (key == 'type') this.setState({showOptions: value == 'select'})
+    let column = {
+      title: this.state.title,
+      isRequired: this.state.isRequired,
+      type: this.state.type,
+      options: options,
     }
+
+    this.resetForm()
+    this.props.addColumns(column)
+  }
+
+  handleChange (event) {
+    let key = event.target.name,
+        value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+
+    this.setState({ [key]: value })
+
+    //if the type chosen is 'select', show the input for its future options
+    if (key == 'type') this.setState({showOptions: value == 'select'})
+  }
 
   render() {
     let modalBody = (<NewColumn showOptions={this.state.showOptions}
@@ -71,6 +70,10 @@ class NewColumnContainer extends React.Component {
                        buttonColor="primary"
                        title="Add new column" />)
   }
+}
+
+NewColumnContainer.propTypes = {
+  addColumns:   PropTypes.func.isRequired,   //column data
 }
 
 const mapStateToProps = state => ({ ...state })

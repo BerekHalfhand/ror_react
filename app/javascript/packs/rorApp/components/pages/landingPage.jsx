@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const LandingPage = props => (
+const LandingPage = () => (
   <article>
     <h1>The Landing Page</h1>
     <img src="https://www.priorityonejets.com/wp-content/uploads/2017/01/Private-Airport-Runway.jpg" className="w-100" />
