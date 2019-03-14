@@ -6,7 +6,7 @@ $header-height: 85px;
   text-align: center;
 }
 
-#sidebar {
+aside {
   background:#111;
   height:100%;
   top:0;
@@ -54,7 +54,7 @@ $header-height: 85px;
   }
 }
 
-.delete-button { opacity: 0; }  
+.delete-button { opacity: 0; }
 
 .table-cell:hover {
   .delete-button {

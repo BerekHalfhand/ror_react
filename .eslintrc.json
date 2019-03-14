@@ -17,6 +17,11 @@
     "plugins": [
         "react"
     ],
+    "globals": {
+      "$": "readable",
+      "process": "readable",
+      "require": "readable"
+    },
     "rules": {
         "indent": "off",
         "react/jsx-indent": "off",
@@ -26,7 +31,7 @@
             "unix"
         ],
         "quotes": [
-            "error",
+            "warn",
             "single"
         ],
         "semi": [

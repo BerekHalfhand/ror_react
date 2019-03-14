@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import autoBind from 'react-autobind'
 import { editRows, editColumns, deleteColumns } from 'packs/rorApp/actions'
-import Octicon, {Beaker, Zap, X} from '@githubprimer/octicons-react'
+import Octicon, {X} from '@githubprimer/octicons-react'
 
 // Components
 import TableCell from './tableCellContainer/tableCell'
